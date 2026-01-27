@@ -622,6 +622,23 @@ footer a.port-link {
   border-radius: 13px;
 }
 
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9; /* modern browsers */
+  /* background: #000; */
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
 @media (max-width: 900px) {
   /* match header mobile padding */
   .site-footer {
