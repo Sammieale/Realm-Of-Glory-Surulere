@@ -293,10 +293,11 @@ header ul li a {
   font-size: 20px;
   font-weight: 600;
   /* font-family: 'Poppins', sans-serif; */
-  color: #545454;
+  color: #1f1f1f;
   background: #fff;
   border: none;
   border-radius: 5px;
+  text-decoration: none;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(222, 222, 222, 0.249);
   transition:
