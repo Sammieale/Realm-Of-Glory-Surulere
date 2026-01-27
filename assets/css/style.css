@@ -147,12 +147,6 @@ header ul li a {
   }
 
   /* small adjustments for footer and other sections */
-  .banner .home-txt {
-    font-size: 28px;
-  }
-  .banner .home-subtxt {
-    font-size: 20px;
-  }
   .home {
     height: 60vh;
   }
@@ -402,6 +396,7 @@ header ul li a {
     padding-left: 12px;
     padding-right: 12px;
   }
+
 }
 
 .ministry-content {
@@ -694,6 +689,16 @@ footer a.port-link {
     font-size: 16px;
     line-height: 1.55;
   }
+  .banner .home-txt {
+    font-size: 29px;
+  }
+  .banner .home-subtxt {
+    font-size: 27px;
+  }
+  .banner .home-btn {
+    font-size: 18px;
+    padding: 16px 32px;
+  }
 }
 
 @media (max-width: 420px) {
@@ -907,6 +912,7 @@ footer a.port-link {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 10%;
 }
 
 .contact-card input,
