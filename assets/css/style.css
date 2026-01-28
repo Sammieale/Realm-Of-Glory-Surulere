@@ -93,6 +93,17 @@ header ul li a {
   align-items: center;
 }
 
+@media (max-width: 1000px) {
+  .live,
+  .mission,
+  .leaders,
+  .half,
+  .banner {
+    /* background-attachment: scroll; */
+    background-position: center !important;
+  }
+}
+
 /* Responsive mobile menu */
 @media (max-width: 900px) {
   header {
@@ -754,13 +765,13 @@ footer a.port-link {
     line-height: 1.55;
   }
   .banner .home-txt {
-    font-size: 29px;
+    font-size: 24px;
   }
   .banner .home-subtxt {
-    font-size: 27px;
+    font-size: 22px;
   }
   .banner .home-btn {
-    font-size: 18px;
+    font-size: 16px;
     padding: 16px 32px;
   }
 }
@@ -828,14 +839,18 @@ footer a.port-link {
 
 /* Reduce ministry section padding on smaller screens */
 @media (max-width: 900px) {
-  .ministry-content,
+  .ministry-content {
+    padding: 70px 30px;
+  }
   .contact-section {
     padding: 26px 30px;
   }
 }
 
 @media (max-width: 520px) {
-  .ministry-content,
+  .ministry-content {
+    padding: 60px 20px;
+  }
   .contact-section {
     padding: 18px 16px;
   }
@@ -949,6 +964,51 @@ footer a.port-link {
   }
 }
 
+@media (max-width: 378px) {
+  .service-timer .countdown {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .service-timer .count-item {
+    min-width: 58px;
+    padding: 4px 4px;
+  }
+  .service-timer .count {
+    font-size: 25px;
+  }
+  .service-timer .count-item:not(:last-child)::after {
+    display: none;
+  }
+  header {
+    padding: 10px 10px;
+  }
+  header.sticky {
+    padding: 6px 10px;
+  }
+
+  /* reduce logo and link sizes to fit */
+  header .logo img {
+    height: 60px;
+  }
+  header ul {
+    gap: 8px;
+  }
+  header ul li a {
+    margin: 0 8px;
+    font-size: 15px;
+    padding: 8px 6px;
+  }
+
+  /* allow nav items to shrink slightly rather than wrap */
+  header ul {
+    flex-wrap: nowrap;
+  }
+  header ul li a {
+    white-space: nowrap;
+  }
+}
+
 /* .contact-section {
   padding: 80px 100px;
   background: linear-gradient(135deg, #f5f7fa, #e4efe9);
@@ -959,8 +1019,9 @@ footer a.port-link {
   font-family: "Segoe UI", sans-serif;
 } */
 
-.contact-section h2 {
-  font-size: 2.5rem;
+.contact-section .contact-title {
+  font-size: clamp(28px, 8vw, 50px);
+  font-weight: 700;
   margin-bottom: 10px;
 }
 .contact-section p {
