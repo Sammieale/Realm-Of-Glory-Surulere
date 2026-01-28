@@ -270,6 +270,30 @@ header ul li a {
   text-align: center;
 }
 
+.home-txt span {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.home-txt span:hover::before {
+  opacity: 0;
+}
+
+.home-txt span::before {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 101%;
+  height: 6px;
+  background: #fff;
+  /* border-radius: 4px; */
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
 .banner .home-subtxt {
   color: #fff;
   font-size: 40px;
@@ -406,7 +430,7 @@ header ul li a {
   gap: 30px;
   height: auto;
   width: 100%;
-  padding: 30px 60px;
+  padding: 80px 100px;
   text-align: center;
   background: #f9f9f9;
 }
@@ -461,7 +485,6 @@ header ul li a {
     box-shadow 0.3s ease-in-out,
     transform 0.3s ease-in-out;
   margin-bottom: 50px;
-  gap: 70px;
 }
 
 .yadah-voices:hover {
@@ -503,7 +526,7 @@ header ul li a {
 }
 
 .yadah-voices .yadah-content {
-  width: 40%;
+  width: 42%;
   text-align: justify;
 }
 
@@ -622,6 +645,22 @@ footer a.port-link {
   background-attachment: fixed;
 }
 
+.mission {
+  background: rgba(0, 0, 0, 0.2) url(../images/sacrifice.png);
+  /* height: 50vh; */
+  background-position: 0 50%;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.leaders {
+  background: rgba(0, 0, 0, 0.7) url(../images/leadership.jpg);
+  /* height: 50vh; */
+  background-position: 0 60%;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .embed-map-container {
   border-radius: 10px;
 }
@@ -697,7 +736,7 @@ footer a.port-link {
   }
 
   .yadah-voices .yadah-img img {
-    height: auto;
+    height: 300px;
     max-height: 420px;
     border-radius: 12px;
   }
