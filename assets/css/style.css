@@ -242,8 +242,7 @@ header ul li a {
 }
 
 .ministry {
-  background: rgba(0, 0, 0, 0.7)
-    url(../images/612041147_1938490810435461_1058655891809531744_n.jpg);
+  background: rgba(0, 0, 0, 0.7) url(../images/612041147_1938490810435461_1058655891809531744_n.jpg);
   background-position: 0 70%;
   background-size: cover;
 }
@@ -396,7 +395,6 @@ header ul li a {
     padding-left: 12px;
     padding-right: 12px;
   }
-
 }
 
 .ministry-content {
@@ -408,17 +406,23 @@ header ul li a {
   gap: 30px;
   height: auto;
   width: 100%;
-  background: #efefef;
   padding: 30px 60px;
-  font-family: "Poppins", sans-serif;
   text-align: center;
+  background: #f9f9f9;
+}
+
+.contact-section {
+  padding: 80px 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  /* height: auto; */
+  background: #efefef;
 }
 
 /* Constrain ministry content to the site container width */
-.ministry-content {
-  max-width: 1026px;
-  margin: 0 auto;
-}
 
 .ministry-content h2 {
   font-size: 36px;
@@ -619,7 +623,7 @@ footer a.port-link {
 }
 
 .embed-map-container {
-  border-radius: 13px;
+  border-radius: 10px;
 }
 
 .video-wrapper {
@@ -777,21 +781,23 @@ footer a.port-link {
   }
 
   /* optional: keep ministry content centered with a sensible max width */
-  .ministry-content {
+  /* .ministry-content {
     max-width: 1026px;
     margin: 0 auto;
-  }
+  } */
 }
 
 /* Reduce ministry section padding on smaller screens */
 @media (max-width: 900px) {
-  .ministry-content {
+  .ministry-content,
+  .contact-section {
     padding: 26px 30px;
   }
 }
 
 @media (max-width: 520px) {
-  .ministry-content {
+  .ministry-content,
+  .contact-section {
     padding: 18px 16px;
   }
   .ministry-content p {
@@ -904,15 +910,15 @@ footer a.port-link {
   }
 }
 
-.contact-section {
-  padding: 80px 20px;
+/* .contact-section {
+  padding: 80px 100px;
   background: linear-gradient(135deg, #f5f7fa, #e4efe9);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   font-family: "Segoe UI", sans-serif;
-}
+} */
 
 .contact-section h2 {
   font-size: 2.5rem;
