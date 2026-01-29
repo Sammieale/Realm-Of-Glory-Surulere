@@ -881,6 +881,7 @@ footer a.port-link {
   font-weight: 700;
   letter-spacing: 1px;
   margin-bottom: 4px;
+  font-size: 26px;
 }
 .service-timer .countdown {
   display: flex;
