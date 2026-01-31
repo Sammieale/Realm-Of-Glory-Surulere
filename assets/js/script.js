@@ -173,11 +173,11 @@ ScrollReveal({
   delay: 400,
 });
 
-ScrollReveal().reveal(".home-txt, .home-subtxt, .service-txt, .contact-title, .subtitle", {
+ScrollReveal().reveal(".home-content, .service-txt, .contact-title, .subtitle", {
   delay: 500,
   origin: "bottom",
 });
-ScrollReveal().reveal(".home-btn, .service-txt", {
+ScrollReveal().reveal(".service-txt", {
   delay: 600,
   origin: "left",
 });
@@ -191,7 +191,7 @@ ScrollReveal().reveal(".embed-map-responsive", {
 });
 ScrollReveal().reveal(".service-note", {
   delay: 800,
-  origin: "right",
+  origin: "left",
 });
 ScrollReveal().reveal(".nav_link, .section_subtitle, .about_description", {
   delay: 600,

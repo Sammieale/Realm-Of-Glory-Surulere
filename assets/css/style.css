@@ -327,18 +327,23 @@ header ul li a {
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 8px 24px rgba(222, 222, 222, 0.249);
+  /* box-shadow: 0 8px 24px rgba(222, 222, 222, 0.249); */
   transition:
     box-shadow 280ms ease,
     transform 160ms ease,
     opacity 200ms ease;
 }
 
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 12px; */
+}
+
 .banner .home-btn:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 12px 32px rgba(222, 222, 222, 0.32),
-    0 0 32px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(222, 222, 222, 0.249);
 }
 
 /* gentle pulsing glow (optional) */
@@ -910,15 +915,11 @@ footer a.port-link {
   transform: translateY(-50%);
   color: #efefef;
   font-size: 46px;
-  text-shadow: 0 6px 18px rgba(255, 255, 255, 0.224);
 }
 .service-timer .count {
   font-size: 52px;
   font-weight: 700;
   color: #efefef;
-  text-shadow:
-    0 8px 28px rgba(231, 231, 231, 0.12),
-    0 0 10px rgba(255, 255, 255, 0.12);
 }
 .service-timer .count-item small {
   color: #efefef;

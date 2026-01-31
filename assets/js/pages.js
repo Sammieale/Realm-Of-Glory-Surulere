@@ -109,4 +109,34 @@ window.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+ScrollReveal({
+  reset: true,
+  distance: "60px",
+  duration: 2500,
+  delay: 400,
+});
 
+ScrollReveal().reveal(".home-content, .service-txt, .contact-title, .subtitle", {
+  delay: 500,
+  origin: "bottom",
+});
+ScrollReveal().reveal(".service-txt, .y1, .y3", {
+  delay: 600,
+  origin: "left",
+});
+ScrollReveal().reveal(".countdown, .home_img, .y2, .y4", {
+  delay: 700,
+  origin: "right",
+});
+ScrollReveal().reveal(".embed-map-responsive", {
+  delay: 900,
+  origin: "right",
+});
+ScrollReveal().reveal(".service-note", {
+  delay: 800,
+  origin: "left",
+});
+ScrollReveal().reveal(".nav_link, .section_subtitle, .about_description", {
+  delay: 600,
+  origin: "top",
+});
