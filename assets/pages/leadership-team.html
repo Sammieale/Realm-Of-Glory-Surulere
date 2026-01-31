@@ -180,16 +180,45 @@
         btn.disabled = true;
         btn.innerText = "Sending...";
 
-        fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => {
-            statusEl.textContent = "📬 Sent! Thank you.";
+        // Get form data
+        const formData = new FormData(form);
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const phone = formData.get("phone");
+        const message = formData.get("message");
+
+        // WhatsApp message format
+        const whatsappMessage = `
+📩 New Website Message
+
+👤 Name: ${name}
+📧 Email: ${email}
+📞 Phone: ${phone}
+
+💬 Message:
+${message}
+  `;
+
+        // 1️⃣ SEND TO GOOGLE SHEETS
+        fetch(scriptURL, {
+          method: "POST",
+          body: formData,
+        })
+          .then(() => {
+            // 2️⃣ SEND TO WHATSAPP BOT (NON-BLOCKING)
+            fetch(
+              `https://api.callmebot.com/whatsapp.php?phone=${whatsappPhone}&text=${encodeURIComponent(whatsappMessage)}&apikey=${whatsappApiKey}`,
+              { method: "GET", mode: "no-cors" },
+            );
+
+            statusEl.textContent = "✅ Message sent successfully!";
             statusEl.style.color = "green";
             btn.disabled = false;
             btn.innerText = "Send Message";
             form.reset();
           })
-          .catch((error) => {
-            statusEl.textContent = "❌ Error sending message.";
+          .catch(() => {
+            statusEl.textContent = "❌ Failed to send message.";
             statusEl.style.color = "red";
             btn.disabled = false;
             btn.innerText = "Send Message";
