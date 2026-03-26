@@ -2122,9 +2122,121 @@
           gap: 0.75rem;
         }
       }
+
+      /* LOADER */
+      #siteLoader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: #150d08;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s ease;
+      }
+      #siteLoader.hide {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .loader-inner {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .loader-cross {
+        font-size: 2.5rem;
+        color: var(--primary);
+        animation: loaderPulse 1.2s ease infinite;
+      }
+      @keyframes loaderPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.18);
+          opacity: 0.6;
+        }
+      }
+      .loader-name {
+        font-family: "Playfair Display", serif;
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .loader-bar {
+        width: 160px;
+        height: 3px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .loader-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        border-radius: 3px;
+        animation: loaderProgress 1.4s ease forwards;
+      }
+      @keyframes loaderProgress {
+        0% {
+          width: 0%;
+        }
+        60% {
+          width: 75%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
+
+      /* PAGE TRANSITION */
+      .page-transition {
+        position: fixed;
+        inset: 0;
+        z-index: 5000;
+        background: #150d08;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.25s ease,
+          visibility 0.25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .page-transition.show {
+        opacity: 1;
+        visibility: visible;
+      }
+      .pt-cross {
+        font-size: 2rem;
+        color: var(--primary);
+        animation: loaderPulse 0.8s ease infinite;
+      }
     </style>
   </head>
   <body>
+    <!-- LOADER -->
+    <div id="siteLoader">
+      <div class="loader-inner">
+        <div class="loader-cross">✝</div>
+        <div class="loader-name">House Of Praise</div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+      </div>
+    </div>
+
+    <!-- PAGE TRANSITION -->
+    <div class="page-transition" id="pageTransition">
+      <div class="pt-cross">✝</div>
+    </div>
+
     <!-- HIDDEN AUDIO ELEMENT -->
     <audio id="audioEl" preload="metadata"></audio>
 
@@ -2550,7 +2662,7 @@
               won't want to miss it!
             </p>
             <button class="btn-primary" style="margin-top: 0.5rem" onclick="showPage('sermons')">
-              <i class="fas fa-headphones"></i> Watch Recordings
+              <i class="fas fa-headphones"></i> Listen to Recordings
             </button>
           </div>
           <iframe
@@ -2597,9 +2709,8 @@
             More Than a Church.<br />A Family.
           </h1>
           <p class="sec-sub reveal" style="margin: 0 auto">
-            Founded in 2004, Grace Covenant began in a living room. Today we are a thriving
-            congregation of 3,000+ members across Lagos — united by one faith, one Lord, one
-            calling.
+            Founded in 2018, Realm Of Glory Surulere is a thriving congregation of people — united
+            by one faith, one Lord, one calling.
           </p>
         </div>
       </div>
@@ -2696,11 +2807,11 @@
             <div class="leader-card reveal" style="transition-delay: 0.05s">
               <div class="leader-img">👨‍💼</div>
               <div class="leader-body">
-                <div class="leader-name">Pastor James Okafor</div>
-                <div class="leader-role">Senior Pastor</div>
+                <div class="leader-name">Pastor Kayode Ajala</div>
+                <div class="leader-role">Lead Pastor</div>
                 <div class="leader-bio">
-                  A visionary leader with over 20 years in ministry, Pastor James carries a burning
-                  passion for souls and a deep love for the Word of God.
+                  A visionary leader with over 20 years in ministry, Pastor Kayode Ajala carries a
+                  burning passion for souls and a deep love for the Word of God.
                 </div>
               </div>
             </div>
@@ -2709,11 +2820,11 @@
                 👩‍💼
               </div>
               <div class="leader-body">
-                <div class="leader-name">Pastor Sarah Okafor</div>
-                <div class="leader-role">Co-Pastor & Women's Minister</div>
+                <div class="leader-name">Pastor Omowunmi Kayode-Ajala</div>
+                <div class="leader-role">Co-Lead Pastor & Women's Minister</div>
                 <div class="leader-bio">
-                  A dynamic teacher and compassionate shepherd, Pastor Sarah leads the women's
-                  ministry with grace, wisdom, and unwavering faith.
+                  A dynamic teacher and compassionate shepherd, Pastor Omowunmi Kayode-Ajala leads
+                  the women's ministry with grace, wisdom, and unwavering faith.
                 </div>
               </div>
             </div>
@@ -2722,10 +2833,10 @@
                 👨‍🎤
               </div>
               <div class="leader-body">
-                <div class="leader-name">Pastor David Adeyemi</div>
-                <div class="leader-role">Worship & Arts Pastor</div>
+                <div class="leader-name">Pastor Martins Alekhojie</div>
+                <div class="leader-role">Admin</div>
                 <div class="leader-bio">
-                  A gifted worshipper and songwriter, Pastor David leads our congregation into the
+                  A gifted worshipper and songwriter, Pastor Martins leads our congregation into the
                   very presence of God each week through anointed music ministry.
                 </div>
               </div>
@@ -2735,8 +2846,8 @@
                 👩‍🏫
               </div>
               <div class="leader-body">
-                <div class="leader-name">Minister Chisom Eze</div>
-                <div class="leader-role">Youth & Next-Gen Pastor</div>
+                <div class="leader-name">Catherine Aligame</div>
+                <div class="leader-role">Asst. Admin</div>
                 <div class="leader-bio">
                   Passionate about raising a generation that loves Jesus, Minister Chisom leads our
                   vibrant youth and young adults ministry with fire.
@@ -3555,23 +3666,36 @@
       ];
 
       function showPage(name) {
-        pages.forEach((p) => {
-          document.getElementById("page-" + p).classList.remove("active");
-          const navEl = document.getElementById("nav-" + p);
-          if (navEl) navEl.classList.remove("active");
-        });
-        document.getElementById("page-" + name).classList.add("active");
-        const navEl = document.getElementById("nav-" + name);
-        if (navEl) navEl.classList.add("active");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setTimeout(initReveal, 100);
-        if (name === "sermons") renderSermons("All");
-        if (name === "livestream") initLivestream();
-        if (name === "events") renderEvents();
-        if (name === "home") {
-          renderHomeSermons();
-          renderHomeEvents();
-        }
+        const transition = document.getElementById("pageTransition");
+
+        // Fade in transition overlay
+        transition.classList.add("show");
+
+        setTimeout(() => {
+          pages.forEach((p) => {
+            document.getElementById("page-" + p).classList.remove("active");
+            const navEl = document.getElementById("nav-" + p);
+            if (navEl) navEl.classList.remove("active");
+          });
+          document.getElementById("page-" + name).classList.add("active");
+          const navEl = document.getElementById("nav-" + name);
+          if (navEl) navEl.classList.add("active");
+          window.scrollTo({ top: 0, behavior: "instant" });
+
+          // Page-specific init
+          if (name === "sermons") renderSermons("All");
+          if (name === "events") renderEvents();
+          if (name === "livestream") initLivestream();
+          if (name === "home") {
+            renderHomeSermons();
+            renderHomeEvents();
+          }
+
+          setTimeout(initReveal, 100);
+
+          // Fade out transition overlay
+          transition.classList.remove("show");
+        }, 280);
       }
 
       // ===================== THEME =====================
@@ -3975,7 +4099,12 @@
       document.addEventListener("DOMContentLoaded", () => {
         renderHomeSermons();
         renderHomeEvents();
-        setTimeout(initReveal, 200);
+
+        // Hide site loader after 1.5s
+        setTimeout(() => {
+          document.getElementById("siteLoader").classList.add("hide");
+          setTimeout(initReveal, 200);
+        }, 1500);
       });
 
       // ===================== YOUTUBE LIVE CHECK =====================
