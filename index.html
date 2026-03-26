@@ -719,25 +719,35 @@
       }
 
       /* PARALLAX QUOTE */
+
       .pq {
         position: relative;
-        overflow: clip;
+        overflow: hidden;
         padding: 7.5rem 2rem;
         text-align: center;
       }
+
       .pq-bg {
         position: absolute;
-        inset: -60px;
+        top: -80px;
+        left: 0;
+        right: 0;
+        bottom: -80px;
         background: linear-gradient(135deg, #140a06 0%, #2a1510 100%);
         will-change: transform;
         z-index: 0;
       }
-      .pq-bg::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(ellipse at center, rgba(232, 97, 74, 0.12) 0%, transparent 70%);
-      }
+
+.pq-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle, rgba(232, 97, 74, 0.35) 1px, transparent 1px),
+    radial-gradient(circle, rgba(232, 97, 74, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px, 12px 12px;
+  background-position: 0 0, 6px 6px;
+}
       .pq-inner {
         position: relative;
         z-index: 2;
@@ -2553,7 +2563,7 @@
       </div>
 
       <!-- WELCOME -->
-      <section style="background: var(--bg); padding-bottom: 0">
+      <section style="background: var(--bg)">
         <div class="sec-inner">
           <div class="welcome-grid">
             <div class="r-left">
@@ -3943,12 +3953,25 @@
         const sy = window.scrollY;
         ["pqBg1", "pqBg2"].forEach((id) => {
           const el = document.getElementById(id);
-          if (el) el.style.transform = `translateY(${sy * 0.13}px)`;
+          if (!el) return;
+          const section = el.closest(".pq");
+          if (!section) return;
+          const rect = section.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (!inView) return;
+          const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          el.style.transform = `translateY(${(progress - 0.5) * 900}px)`;
         });
+
         const ctaBg = document.getElementById("ctaBg");
         if (ctaBg) {
-          const rect = ctaBg.closest(".cta-pq").getBoundingClientRect();
-          ctaBg.style.transform = `translateY(${rect.top * 0.15}px)`;
+          const section = ctaBg.closest(".cta-pq");
+          if (!section) return;
+          const rect = section.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (!inView) return;
+          const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          ctaBg.style.transform = `translateY(${(progress - 0.5) * 60}px)`;
         }
       }
 
