@@ -5882,12 +5882,12 @@
           const res = await fetch(
             `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YT_CHANNEL_ID}&eventType=live&type=video&key=${YT_API_KEY}`,
           );
-          if (res.status === 403) {
-            console.warn("YouTube API key error (403). Falling back to channel embed.");
-            showChannelFallback();
+          const data = await res.json();
+          if (res.status === 403 || (data.error && data.error.code === 403)) {
+            console.warn("YouTube API key error (403). Showing offline state.");
+            showStreamOff();
             return;
           }
-          const data = await res.json();
           if (data.items && data.items.length > 0) {
             const videoId = data.items[0].id.videoId;
             document.getElementById("streamOff").style.display = "none";
@@ -5896,21 +5896,19 @@
             frame.style.display = "block";
             document.getElementById("liveNowBtn").classList.add("show");
           } else {
-            document.getElementById("streamOff").style.display = "flex";
-            document.getElementById("liveFrame").style.display = "none";
-            document.getElementById("liveFrame").src = "";
+            showStreamOff();
           }
         } catch (e) {
           console.log("Live check failed:", e);
-          showChannelFallback();
+          showStreamOff();
         }
       }
 
-      function showChannelFallback() {
-        document.getElementById("streamOff").style.display = "none";
+      function showStreamOff() {
+        document.getElementById("streamOff").style.display = "flex";
         const frame = document.getElementById("liveFrame");
-        frame.src = `https://www.youtube.com/embed/live_stream?channel=${YT_CHANNEL_ID}`;
-        frame.style.display = "block";
+        frame.style.display = "none";
+        frame.src = "";
       }
 
       function initLivestream() {
