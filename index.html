@@ -1585,36 +1585,73 @@
         margin-top: 3.5rem;
       }
       .vm-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border2);
-        border-radius: 18px;
-        padding: 2.25rem;
+        border-radius: 22px;
+        padding: 2.5rem;
         position: relative;
         overflow: hidden;
+        transition: all 0.3s;
+        background: linear-gradient(145deg, var(--surface) 0%, var(--surface2) 100%);
+        border: 1px solid var(--border2);
+      }
+      .vm-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 60px rgba(232, 97, 74, 0.12);
+        border-color: rgba(232, 97, 74, 0.3);
       }
       .vm-card::before {
-        content: "";
+        content: attr(data-label);
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3.5px;
-        background: var(--primary);
+        bottom: -1rem;
+        right: 1.5rem;
+        font-family: "Playfair Display", serif;
+        font-size: 9rem;
+        font-weight: 900;
+        color: var(--primary);
+        opacity: 0.05;
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
       }
-      .vm-icon {
-        font-size: 2.2rem;
-        margin-bottom: 0.85rem;
+      .vm-icon-wrap {
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 24px rgba(232, 97, 74, 0.3);
+      }
+      .vm-icon-wrap i {
+        color: white;
+        font-size: 1.65rem;
       }
       .vm-card h3 {
         font-family: "Playfair Display", serif;
-        font-size: 1.4rem;
-        margin-bottom: 0.7rem;
-        color: var(--primary);
+        font-size: 1.55rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+      }
+      .vm-divider {
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 2px;
+        margin-bottom: 1rem;
       }
       .vm-card p {
         color: var(--text2);
-        line-height: 1.72;
+        line-height: 1.8;
         font-size: 0.95rem;
+        position: relative;
+        z-index: 1;
+      }
+      @media (max-width: 900px) {
+        .vm-grid {
+          grid-template-columns: 1fr;
+        }
       }
       .vals-grid {
         display: grid;
@@ -1900,6 +1937,14 @@
         margin: 3rem auto 0;
         padding: 0 2rem;
       }
+
+      @media (max-width: 600px) {
+        .give-grid {
+          grid-template-columns: 1fr;
+          padding: 0 1.25rem;
+          margin: 2rem auto 0;
+        }
+      }
       .give-card {
         background: var(--card-bg);
         border: 1px solid var(--border2);
@@ -2063,6 +2108,569 @@
       }
       .copy-btn:hover {
         text-decoration: underline;
+      }
+
+      /* ===== CHILDREN'S MINISTRY PAGE ===== */
+      .kids-page {
+        background: #fff9f0;
+        min-height: 100vh;
+      }
+      [data-theme="dark"] .kids-page {
+        background: #1a1510;
+      }
+      .kids-hero {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffa94d 40%, #ffd43b 100%);
+        padding: 7rem 2rem 5rem;
+        text-align: center;
+      }
+      .kids-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='4' fill='%23ffffff' fill-opacity='0.12'/%3E%3Ccircle cx='50' cy='30' r='6' fill='%23ffffff' fill-opacity='0.08'/%3E%3Ccircle cx='70' cy='60' r='3' fill='%23ffffff' fill-opacity='0.1'/%3E%3Ccircle cx='20' cy='65' r='5' fill='%23ffffff' fill-opacity='0.07'/%3E%3C/svg%3E")
+          repeat;
+      }
+      .kids-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: white;
+        padding: 0.4rem 1.1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+      .kids-hero h1 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.5rem, 7vw, 5rem);
+        font-weight: 700;
+        color: white;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+      }
+      .kids-hero p {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: rgba(255, 255, 255, 0.92);
+        max-width: 540px;
+        margin: 0 auto 2rem;
+        line-height: 1.7;
+        position: relative;
+        z-index: 2;
+      }
+      .kids-hero-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 2;
+      }
+      .btn-kids-primary {
+        background: white;
+        color: #ff6b6b;
+        border: none;
+        padding: 0.85rem 2rem;
+        border-radius: 50px;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.25s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      }
+      .btn-kids-primary:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      }
+      .btn-kids-outline {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        padding: 0.85rem 2rem;
+        border-radius: 50px;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .btn-kids-outline:hover {
+        background: rgba(255, 255, 255, 0.15);
+        border-color: white;
+        transform: translateY(-3px);
+      }
+      /* floating shapes in hero */
+      .kids-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.18;
+        animation: floatShape 4s ease-in-out infinite;
+      }
+      .kids-shape:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        background: white;
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+      .kids-shape:nth-child(2) {
+        width: 50px;
+        height: 50px;
+        background: white;
+        top: 20%;
+        right: 8%;
+        animation-delay: 0.8s;
+      }
+      .kids-shape:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        background: white;
+        bottom: 10%;
+        left: 12%;
+        animation-delay: 1.4s;
+      }
+      .kids-shape:nth-child(4) {
+        width: 60px;
+        height: 60px;
+        background: white;
+        bottom: 15%;
+        right: 6%;
+        animation-delay: 0.4s;
+      }
+      .kids-shape:nth-child(5) {
+        width: 35px;
+        height: 35px;
+        background: white;
+        top: 50%;
+        left: 2%;
+        animation-delay: 1s;
+      }
+      @keyframes floatShape {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-18px) rotate(8deg);
+        }
+      }
+      /* wave divider */
+      .kids-wave {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        margin-bottom: -2px;
+      }
+      /* age groups */
+      .kids-section {
+        padding: 5rem 2rem;
+        background: #fff9f0;
+      }
+      [data-theme="dark"] .kids-section {
+        background: #1a1510;
+      }
+      .kids-section-alt {
+        padding: 5rem 2rem;
+        background: #fff3e0;
+      }
+      [data-theme="dark"] .kids-section-alt {
+        background: #1f1a14;
+      }
+      .kids-sec-inner {
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+      .kids-sec-tag {
+        display: inline-block;
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 0.65rem;
+        color: #ff6b6b;
+      }
+      .kids-sec-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(1.9rem, 4vw, 2.8rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+        color: var(--text);
+      }
+      .kids-sec-sub {
+        font-size: 1rem;
+        color: var(--text2);
+        line-height: 1.75;
+        max-width: 560px;
+        margin-bottom: 3rem;
+      }
+      .age-groups-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+      .age-card {
+        border-radius: 24px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+      .age-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+      }
+      .age-card.yellow {
+        background: linear-gradient(145deg, #fff9db, #fff3bf);
+        border-color: #ffd43b;
+      }
+      .age-card.orange {
+        background: linear-gradient(145deg, #fff4e6, #ffe8cc);
+        border-color: #ffa94d;
+      }
+      .age-card.red {
+        background: linear-gradient(145deg, #fff5f5, #ffe3e3);
+        border-color: #ff6b6b;
+      }
+      .age-card.green {
+        background: linear-gradient(145deg, #ebfbee, #d3f9d8);
+        border-color: #51cf66;
+      }
+      [data-theme="dark"] .age-card.yellow {
+        background: linear-gradient(145deg, #2a2410, #221d0c);
+      }
+      [data-theme="dark"] .age-card.orange {
+        background: linear-gradient(145deg, #2a1e10, #22180c);
+      }
+      [data-theme="dark"] .age-card.red {
+        background: linear-gradient(145deg, #2a1010, #220c0c);
+      }
+      [data-theme="dark"] .age-card.green {
+        background: linear-gradient(145deg, #102a14, #0c220f);
+      }
+      .age-card-emoji {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        display: block;
+        animation: wiggle 3s ease-in-out infinite;
+      }
+      .age-card:nth-child(2) .age-card-emoji {
+        animation-delay: 0.4s;
+      }
+      .age-card:nth-child(3) .age-card-emoji {
+        animation-delay: 0.8s;
+      }
+      .age-card:nth-child(4) .age-card-emoji {
+        animation-delay: 1.2s;
+      }
+      @keyframes wiggle {
+        0%,
+        90%,
+        100% {
+          transform: rotate(0deg);
+        }
+        93% {
+          transform: rotate(-8deg);
+        }
+        97% {
+          transform: rotate(8deg);
+        }
+      }
+      .age-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        color: var(--text);
+      }
+      .age-card .age-range {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        padding: 0.22rem 0.8rem;
+        border-radius: 50px;
+        margin-bottom: 0.75rem;
+      }
+      .age-card.yellow .age-range {
+        background: #ffd43b;
+        color: #5c4a00;
+      }
+      .age-card.orange .age-range {
+        background: #ffa94d;
+        color: #5c2e00;
+      }
+      .age-card.red .age-range {
+        background: #ff6b6b;
+        color: white;
+      }
+      .age-card.green .age-range {
+        background: #51cf66;
+        color: #0a3d13;
+      }
+      .age-card p {
+        font-size: 0.85rem;
+        color: var(--text2);
+        line-height: 1.65;
+      }
+      /* what we do section */
+      .kids-features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.35rem;
+        margin-top: 2.5rem;
+      }
+      .kids-feat {
+        background: white;
+        border-radius: 18px;
+        padding: 1.75rem;
+        text-align: center;
+        border: 2px solid transparent;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      [data-theme="dark"] .kids-feat {
+        background: var(--surface);
+      }
+      .kids-feat:hover {
+        border-color: #ff6b6b;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 35px rgba(255, 107, 107, 0.15);
+      }
+      .kids-feat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+        font-size: 1.4rem;
+        color: white;
+      }
+      .kids-feat-icon.c1 {
+        background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+      }
+      .kids-feat-icon.c2 {
+        background: linear-gradient(135deg, #ffa94d, #ffc078);
+      }
+      .kids-feat-icon.c3 {
+        background: linear-gradient(135deg, #51cf66, #69db7c);
+      }
+      .kids-feat-icon.c4 {
+        background: linear-gradient(135deg, #339af0, #74c0fc);
+      }
+      .kids-feat-icon.c5 {
+        background: linear-gradient(135deg, #cc5de8, #e599f7);
+      }
+      .kids-feat-icon.c6 {
+        background: linear-gradient(135deg, #ff6b6b, #ffa94d);
+      }
+      .kids-feat h4 {
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin-bottom: 0.4rem;
+        color: var(--text);
+      }
+      .kids-feat p {
+        font-size: 0.82rem;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+      /* schedule */
+      .kids-schedule-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.35rem;
+        margin-top: 2.5rem;
+      }
+      .kids-sched-card {
+        border-radius: 18px;
+        padding: 1.75rem;
+        border: 2px solid transparent;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        background: white;
+      }
+      [data-theme="dark"] .kids-sched-card {
+        background: var(--surface);
+      }
+      .kids-sched-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+      }
+      .kids-sched-card.s1 {
+        border-color: #ffd43b;
+      }
+      .kids-sched-card.s2 {
+        border-color: #ff6b6b;
+      }
+      .kids-sched-card.s3 {
+        border-color: #51cf66;
+      }
+      .kids-sched-top {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .kids-sched-dot {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: white;
+        flex-shrink: 0;
+      }
+      .s1 .kids-sched-dot {
+        background: linear-gradient(135deg, #ffd43b, #ffa94d);
+      }
+      .s2 .kids-sched-dot {
+        background: linear-gradient(135deg, #ff6b6b, #ff8787);
+      }
+      .s3 .kids-sched-dot {
+        background: linear-gradient(135deg, #51cf66, #2f9e44);
+      }
+      .kids-sched-card h4 {
+        font-weight: 700;
+        font-size: 1rem;
+        color: var(--text);
+        margin-bottom: 0.15rem;
+      }
+      .kids-sched-card .sched-day-tag {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #ff6b6b;
+      }
+      .kids-sched-card p {
+        font-size: 0.83rem;
+        color: var(--text2);
+        line-height: 1.6;
+        margin-bottom: 0.75rem;
+      }
+      .kids-sched-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        padding-top: 0.75rem;
+        margin-top: 0.25rem;
+      }
+      [data-theme="dark"] .kids-sched-meta {
+        border-top-color: rgba(255, 255, 255, 0.06);
+      }
+      .kids-sched-meta-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.77rem;
+        color: var(--text3);
+      }
+      .kids-sched-meta-row i {
+        color: #ff6b6b;
+        width: 13px;
+      }
+      /* fun CTA banner */
+      .kids-cta {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ffa94d 60%, #ffd43b 100%);
+        padding: 5rem 2rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .kids-cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='20' fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='1'/%3E%3C/svg%3E")
+          repeat;
+      }
+      .kids-cta h2 {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        color: white;
+        margin-bottom: 0.9rem;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      }
+      .kids-cta p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.05rem;
+        margin-bottom: 2rem;
+        line-height: 1.7;
+        max-width: 520px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 2;
+      }
+      .kids-cta-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 2;
+      }
+      /* back button */
+      .kids-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        padding: 0.5rem 1.1rem;
+        border-radius: 50px;
+        font-family: "Outfit", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        margin-bottom: 2rem;
+        transition: all 0.2s;
+      }
+      .kids-back-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      @media (max-width: 900px) {
+        .kids-section .sec-inner > div[style*="grid-template-columns:1fr 1fr"],
+        .kids-page .kids-section > .kids-sec-inner > div {
+          grid-template-columns: 1fr !important;
+          gap: 2rem !important;
+        }
       }
 
       /* CONTACT */
@@ -3133,21 +3741,26 @@
       <section style="background: var(--bg); padding-top: 0">
         <div class="sec-inner">
           <div class="vm-grid">
-            <div class="vm-card reveal">
-              <div class="vm-icon">🎯</div>
+            <div class="vm-card reveal" data-label="V">
+              <div class="vm-icon-wrap">
+                <i class="fas fa-eye"></i>
+              </div>
               <h3>Our Vision</h3>
+              <div class="vm-divider"></div>
               <p>
-                We are A People of Praise, Prayer and Sacrifice" and we exist to honor God and to
+                We are A People of Praise, Prayer and Sacrifice — and we exist to honor God and to
                 make Disciples.
               </p>
             </div>
-            <div class="vm-card reveal" style="transition-delay: 0.12s">
-              <div class="vm-icon">🚀</div>
+            <div class="vm-card reveal" style="transition-delay: 0.12s" data-label="M">
+              <div class="vm-icon-wrap">
+                <i class="fas fa-cross"></i>
+              </div>
               <h3>Our Mission</h3>
+              <div class="vm-divider"></div>
               <p>
                 We believe in the transformation and discipleship of every believer through
-                establishing strong biblical foundations... "thus, we say, "Transformed Life,
-                Transformed Society".
+                establishing strong biblical foundations — "Transformed Life, Transformed Society".
               </p>
             </div>
           </div>
@@ -3836,6 +4449,512 @@
       </section>
     </div>
 
+    <!-- ============================= CHILDREN'S MINISTRY ============================= -->
+    <div class="page" id="page-children">
+      <div class="kids-page">
+        <!-- HERO -->
+        <div class="kids-hero">
+          <div class="kids-shape"></div>
+          <div class="kids-shape"></div>
+          <div class="kids-shape"></div>
+          <div class="kids-shape"></div>
+          <div class="kids-shape"></div>
+          <div style="position: relative; z-index: 2">
+            <button class="kids-back-btn" onclick="showPage('home')">
+              <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+            <div class="kids-hero-badge"><i class="fas fa-star"></i> Realm Of Glory Kids</div>
+            <h1>A Place Where Kids<br />Meet Jesus! 🎉</h1>
+            <p>
+              A safe, fun, and Spirit-filled environment where children grow in faith, make friends,
+              and discover how much God loves them.
+            </p>
+            <div class="kids-hero-btns">
+              <button
+                class="btn-kids-primary"
+                onclick="
+                  document.getElementById('kids-schedule').scrollIntoView({ behavior: 'smooth' })
+                "
+              >
+                <i class="fas fa-calendar-alt"></i> When We Meet
+              </button>
+              <button class="btn-kids-outline" onclick="showPage('contact')">
+                <i class="fas fa-phone"></i> Contact Us
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- WAVE -->
+        <svg
+          class="kids-wave"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          style="height: 50px; background: linear-gradient(135deg, #ff6b6b, #ffd43b)"
+        >
+          <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#fff9f0" />
+        </svg>
+
+        <!-- WELCOME NOTE -->
+        <div class="kids-section">
+          <div class="kids-sec-inner">
+            <div
+              style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center"
+            >
+              <div class="reveal">
+                <span class="kids-sec-tag">Just Show Up!</span>
+                <h2 class="kids-sec-title">
+                  Simply Bring Your Child —<br />We'll Take It From There!
+                </h2>
+                <p
+                  style="
+                    color: var(--text2);
+                    line-height: 1.8;
+                    font-size: 0.98rem;
+                    margin-bottom: 1.25rem;
+                  "
+                >
+                  No registration, no forms, no stress. Just bring your child along on Sunday
+                  morning and our warm, trained team will welcome them with open arms.
+                </p>
+                <p
+                  style="
+                    color: var(--text2);
+                    line-height: 1.8;
+                    font-size: 0.98rem;
+                    margin-bottom: 1.5rem;
+                  "
+                >
+                  While you worship in the main service, your child will be in safe hands — learning
+                  about Jesus, making friends, singing, playing and having the time of their life!
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem">
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.75rem;
+                      font-size: 0.9rem;
+                      color: var(--text2);
+                    "
+                  >
+                    <div
+                      style="
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #ff6b6b, #ffa94d);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <i class="fas fa-check" style="color: white; font-size: 0.75rem"></i>
+                    </div>
+                    No registration required
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.75rem;
+                      font-size: 0.9rem;
+                      color: var(--text2);
+                    "
+                  >
+                    <div
+                      style="
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #ff6b6b, #ffa94d);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <i class="fas fa-check" style="color: white; font-size: 0.75rem"></i>
+                    </div>
+                    Trained & loving caregivers
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.75rem;
+                      font-size: 0.9rem;
+                      color: var(--text2);
+                    "
+                  >
+                    <div
+                      style="
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #ff6b6b, #ffa94d);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <i class="fas fa-check" style="color: white; font-size: 0.75rem"></i>
+                    </div>
+                    Safe & secure environment
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 0.75rem;
+                      font-size: 0.9rem;
+                      color: var(--text2);
+                    "
+                  >
+                    <div
+                      style="
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: linear-gradient(135deg, #ff6b6b, #ffa94d);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-shrink: 0;
+                      "
+                    >
+                      <i class="fas fa-check" style="color: white; font-size: 0.75rem"></i>
+                    </div>
+                    Open to all children ages 0 – 12
+                  </div>
+                </div>
+              </div>
+              <div class="reveal" style="transition-delay: 0.15s">
+                <div
+                  style="
+                    background: linear-gradient(135deg, #ff6b6b, #ffa94d, #ffd43b);
+                    border-radius: 24px;
+                    padding: 3rem;
+                    text-align: center;
+                    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.25);
+                    position: relative;
+                    overflow: hidden;
+                  "
+                >
+                  <div
+                    style="
+                      position: absolute;
+                      inset: 0;
+                      background: url(&quot;data:image/svg+xml,%3Csvg width=60 height=60 viewBox=0 0 60 60 xmlns=http://www.w3.org/2000/svg%3E%3Ccircle cx=30 cy=30 r=20 fill=none stroke=%23ffffff stroke-opacity=0.08 stroke-width=1/%3E%3C/svg%3E&quot;)
+                        repeat;
+                    "
+                  ></div>
+                  <div style="position: relative; z-index: 2">
+                    <div
+                      style="
+                        font-size: 4.5rem;
+                        margin-bottom: 1rem;
+                        animation: wiggle 3s ease-in-out infinite;
+                      "
+                    >
+                      🙌
+                    </div>
+                    <h3
+                      style="
+                        font-family: &quot;Playfair Display&quot;, serif;
+                        font-size: 1.6rem;
+                        color: white;
+                        margin-bottom: 0.5rem;
+                        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                      "
+                    >
+                      Every Sunday
+                    </h3>
+                    <p
+                      style="
+                        color: rgba(255, 255, 255, 0.9);
+                        font-size: 1rem;
+                        margin-bottom: 1.5rem;
+                        line-height: 1.6;
+                      "
+                    >
+                      Kids Church runs at the same time as the main service so the whole family can
+                      come together!
+                    </p>
+                    <div
+                      style="
+                        background: rgba(255, 255, 255, 0.22);
+                        backdrop-filter: blur(8px);
+                        border: 1px solid rgba(255, 255, 255, 0.35);
+                        border-radius: 14px;
+                        padding: 1.1rem 1.5rem;
+                      "
+                    >
+                      <div
+                        style="
+                          font-size: 0.72rem;
+                          font-weight: 700;
+                          text-transform: uppercase;
+                          letter-spacing: 0.1em;
+                          color: rgba(255, 255, 255, 0.8);
+                          margin-bottom: 0.35rem;
+                        "
+                      >
+                        Service Time
+                      </div>
+                      <div style="font-size: 1.5rem; font-weight: 800; color: white">10:00 AM</div>
+                      <div
+                        style="
+                          font-size: 0.82rem;
+                          color: rgba(255, 255, 255, 0.8);
+                          margin-top: 0.2rem;
+                        "
+                      >
+                        Kids Hall · Church Building
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AGE GROUPS -->
+        <div class="kids-section-alt">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">Who We Serve</span>
+              <h2 class="kids-sec-title reveal">Every Child Belongs Here</h2>
+              <p class="kids-sec-sub reveal" style="margin: 0 auto 3rem">
+                From babies to preteens — we have a specially designed programme for every stage of
+                your child's journey with God.
+              </p>
+            </div>
+            <div class="age-groups-grid">
+              <div class="age-card yellow reveal">
+                <span class="age-card-emoji">👶</span>
+                <div class="age-range">Ages 0 – 2</div>
+                <h3>Little Lambs</h3>
+                <p>
+                  A cozy, safe nursery where our littlest ones are loved and cared for while parents
+                  worship freely.
+                </p>
+              </div>
+              <div class="age-card orange reveal" style="transition-delay: 0.1s">
+                <span class="age-card-emoji">🧒</span>
+                <div class="age-range">Ages 3 – 5</div>
+                <h3>Sunshine Kids</h3>
+                <p>
+                  Songs, stories and Bible fun! Kids discover God's love through play, craft and
+                  simple Scripture.
+                </p>
+              </div>
+              <div class="age-card red reveal" style="transition-delay: 0.2s">
+                <span class="age-card-emoji">👦</span>
+                <div class="age-range">Ages 6 – 9</div>
+                <h3>Kingdom Explorers</h3>
+                <p>
+                  Adventure-based Bible lessons, memory verses, worship and exciting activities that
+                  build faith.
+                </p>
+              </div>
+              <div class="age-card green reveal" style="transition-delay: 0.3s">
+                <span class="age-card-emoji">🧑</span>
+                <div class="age-range">Ages 10 – 12</div>
+                <h3>Future Leaders</h3>
+                <p>
+                  Deeper Bible study, leadership training and mentorship preparing preteens to live
+                  boldly for Christ.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHAT WE DO -->
+        <div class="kids-section">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">What We Do</span>
+              <h2 class="kids-sec-title reveal">Fun + Faith = 🔥</h2>
+              <p class="kids-sec-sub reveal" style="margin: 0 auto">
+                Every Sunday is packed with activities that make kids excited to come back!
+              </p>
+            </div>
+            <div class="kids-features-grid">
+              <div class="kids-feat reveal">
+                <div class="kids-feat-icon c1"><i class="fas fa-bible"></i></div>
+                <h4>Bible Stories</h4>
+                <p>
+                  Exciting, interactive lessons that bring God's Word to life in ways kids
+                  understand and remember.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.08s">
+                <div class="kids-feat-icon c2"><i class="fas fa-music"></i></div>
+                <h4>Praise & Worship</h4>
+                <p>
+                  Energetic, joyful worship sessions where kids learn to express their love for God
+                  through song.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.12s">
+                <div class="kids-feat-icon c3"><i class="fas fa-palette"></i></div>
+                <h4>Arts & Crafts</h4>
+                <p>
+                  Creative projects that reinforce Bible lessons and let kids express their
+                  God-given creativity.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.16s">
+                <div class="kids-feat-icon c4"><i class="fas fa-hands-praying"></i></div>
+                <h4>Prayer Time</h4>
+                <p>
+                  Teaching children to talk to God naturally, building a lifelong habit of prayer
+                  from a young age.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.2s">
+                <div class="kids-feat-icon c5"><i class="fas fa-users"></i></div>
+                <h4>Friendship & Fun</h4>
+                <p>
+                  Games, group activities and bonding moments that help kids build lasting
+                  Christ-centered friendships.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.24s">
+                <div class="kids-feat-icon c6"><i class="fas fa-shield-alt"></i></div>
+                <h4>Safe Environment</h4>
+                <p>
+                  All our workers are trained, vetted and passionate about child safety and
+                  wellbeing always.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SCHEDULE -->
+        <div class="kids-section-alt" id="kids-schedule">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">When We Meet</span>
+              <h2 class="kids-sec-title reveal">Kids Programme Schedule</h2>
+            </div>
+            <div
+              class="reveal"
+              style="
+                max-width: 520px;
+                margin: 2rem auto 0;
+                background: white;
+                border-radius: 18px;
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+                box-shadow: 0 8px 32px rgba(255, 107, 107, 0.1);
+                border: 2px solid #ffd43b;
+              "
+            >
+              <div
+                style="
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 16px;
+                  background: linear-gradient(135deg, #ffd43b, #ffa94d);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-shrink: 0;
+                "
+              >
+                <i class="fas fa-sun" style="color: white; font-size: 1.6rem"></i>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: #ff6b6b;
+                    margin-bottom: 0.2rem;
+                  "
+                >
+                  Every Sunday
+                </div>
+                <div
+                  style="
+                    font-size: 1.15rem;
+                    font-weight: 700;
+                    color: var(--text);
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  Sunday Kids Church
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.25rem">
+                  <span
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text3);
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                    "
+                    ><i class="fas fa-clock" style="color: #ff6b6b; width: 12px"></i> 10:00 AM –
+                    12:30 PM</span
+                  >
+                  <span
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text3);
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                    "
+                    ><i class="fas fa-map-marker-alt" style="color: #ff6b6b; width: 12px"></i> Kids
+                    Hall, Church Building</span
+                  >
+                  <span
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text3);
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                    "
+                    ><i class="fas fa-child" style="color: #ff6b6b; width: 12px"></i> Ages 0 – 12 ·
+                    Walk-ins welcome!</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="kids-cta">
+          <h2>Your Child's Faith Journey<br />Starts This Sunday! 🌟</h2>
+          <p>
+            Just show up this Sunday and let us take care of the rest. No forms, no stress — just
+            bring your child and watch them fall in love with Jesus!
+          </p>
+          <div class="kids-cta-btns">
+            <button class="btn-kids-primary" onclick="showPage('contact')">
+              <i class="fas fa-phone"></i> Get In Touch
+            </button>
+            <button class="btn-kids-outline" onclick="showPage('home')">
+              <i class="fas fa-home"></i> Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <footer>
       <div class="foot-inner">
@@ -3869,9 +4988,7 @@
             <h5>Ministries</h5>
             <ul>
               <li>
-                <a onclick="showToast('Children\'s Ministry info coming soon!')"
-                  >Children's Ministry</a
-                >
+                <a onclick="showPage('children')">Children's Ministry</a>
               </li>
               <li><a onclick="showToast('Youth Ministry info coming soon!')">Youth Ministry</a></li>
               <li>
@@ -4160,6 +5277,7 @@
         "gallery",
         "give",
         "contact",
+        "children",
       ];
 
       function showPage(name) {
@@ -4681,6 +5799,16 @@
           color: "green",
           page: "events",
           keywords: "events gatherings calendar upcoming community",
+        },
+        {
+          type: "page",
+          title: "Children's Ministry",
+          sub: "Kids church, age groups & schedule",
+          icon: "fa-child",
+          color: "",
+          page: "children",
+          keywords:
+            "children kids ministry sunday nursery babies toddlers preteens youth little lambs sunshine kingdom explorers future leaders",
         },
         {
           type: "page",
