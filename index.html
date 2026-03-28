@@ -5875,7 +5875,8 @@
       // ===================== YOUTUBE LIVE CHECK =====================
       // API key is hidden inside Google Apps Script — not visible here
       // ===================== YOUTUBE LIVE CHECK =====================
-      const PROXY_URL = "https://script.google.com/macros/s/AKfycbzA1yGUHx-J0puhU1X27teokLplwGD8HLQYRwFBsZueY5ftEMiP2slLdcneVY6lsYsv/exec";
+      const PROXY_URL =
+        "https://script.google.com/macros/s/AKfycbzA1yGUHx-J0puhU1X27teokLplwGD8HLQYRwFBsZueY5ftEMiP2slLdcneVY6lsYsv/exec";
 
       async function checkYouTubeLive() {
         try {
@@ -5923,11 +5924,9 @@
           (day === 3 && hour >= 17 && hour < 21) ||
           // Friday 7PM - 11PM (Prayer Night)
           (day === 5 && hour >= 19 && hour < 23) ||
-          // Saturday 5AM - 8AM (Powerhouse Prayer)
-          (day === 6 && hour >= 5 && hour < 8);
+          // Saturday 5AM - 12PM (Powerhouse Prayer)
+          (day === 6 && hour >= 5 && hour < 12);
 
-        // During service times check every 30 seconds
-        // Outside service times check every 15 minutes
         return isServiceTime ? 30000 : 900000;
       }
 
