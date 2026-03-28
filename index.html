@@ -2673,6 +2673,77 @@
         }
       }
 
+      /* KIDS GALLERY */
+      .kids-gal-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 200px);
+        gap: 0.9rem;
+      }
+      .kids-gal-item {
+        border-radius: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.3s;
+      }
+      .kids-gal-item:hover {
+        transform: scale(1.03);
+        z-index: 5;
+      }
+      .kids-gal-item:hover .kids-gal-ov {
+        opacity: 1;
+      }
+      .kids-gal-item.span2x2 {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+      .kids-gal-item.span2x1 {
+        grid-column: span 2;
+      }
+      .kids-gal-inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+      }
+      .kids-gal-ov {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 107, 107, 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+        color: white;
+        font-size: 1.5rem;
+        border-radius: 16px;
+      }
+
+      @media (max-width: 900px) {
+        .kids-gal-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+        }
+        .kids-gal-item.span2x2,
+        .kids-gal-item.span2x1 {
+          grid-column: span 1;
+          grid-row: span 1;
+        }
+      }
+      @media (max-width: 600px) {
+        .kids-gal-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+        }
+        .kids-gal-item {
+          height: 140px;
+        }
+      }
+
       /* CONTACT */
       .contact-grid {
         display: grid;
@@ -4492,11 +4563,302 @@
           preserveAspectRatio="none"
           style="height: 50px; background: linear-gradient(135deg, #ff6b6b, #ffd43b)"
         >
-          <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#fff9f0" />
+          <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#fff3e0" />
         </svg>
 
-        <!-- WELCOME NOTE -->
+        <!-- SCHEDULE -->
+        <div class="kids-section-alt" id="kids-schedule">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">When We Meet</span>
+              <h2 class="kids-sec-title reveal">Kids Programme Schedule</h2>
+            </div>
+            <div
+              class="reveal"
+              style="
+                max-width: 520px;
+                margin: 2rem auto 0;
+                background: white;
+                border-radius: 18px;
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+                box-shadow: 0 8px 32px rgba(255, 107, 107, 0.1);
+                border: 2px solid #ffd43b;
+              "
+            >
+              <div
+                style="
+                  width: 64px;
+                  height: 64px;
+                  border-radius: 16px;
+                  background: linear-gradient(135deg, #ffd43b, #ffa94d);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  flex-shrink: 0;
+                "
+              >
+                <i class="fas fa-sun" style="color: white; font-size: 1.6rem"></i>
+              </div>
+              <div>
+                <div
+                  style="
+                    font-size: 0.7rem;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    color: #ff6b6b;
+                    margin-bottom: 0.2rem;
+                  "
+                >
+                  Every Sunday
+                </div>
+                <div
+                  style="
+                    font-size: 1.15rem;
+                    font-weight: 700;
+                    color: var(--text);
+                    margin-bottom: 0.5rem;
+                  "
+                >
+                  Sunday Kids Church
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.25rem">
+                  <span
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text3);
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                    "
+                    ><i class="fas fa-clock" style="color: #ff6b6b; width: 12px"></i> 10:00 AM –
+                    12:30 PM</span
+                  >
+                  <span
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text3);
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                    "
+                    ><i class="fas fa-map-marker-alt" style="color: #ff6b6b; width: 12px"></i> Kids
+                    Hall, Church Building</span
+                  >
+                  <span
+                    style="
+                      font-size: 0.82rem;
+                      color: var(--text3);
+                      display: flex;
+                      align-items: center;
+                      gap: 0.4rem;
+                    "
+                    ><i class="fas fa-child" style="color: #ff6b6b; width: 12px"></i> Ages 0 – 12 ·
+                    Walk-ins welcome!</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+        <!-- WHAT WE DO -->
         <div class="kids-section">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">What We Do</span>
+              <h2 class="kids-sec-title reveal">Fun + Faith = 🔥</h2>
+              <p class="kids-sec-sub reveal" style="margin: 0 auto">
+                Every Sunday is packed with activities that make kids excited to come back!
+              </p>
+            </div>
+            <div class="kids-features-grid">
+              <div class="kids-feat reveal">
+                <div class="kids-feat-icon c1"><i class="fas fa-bible"></i></div>
+                <h4>Bible Stories</h4>
+                <p>
+                  Exciting, interactive lessons that bring God's Word to life in ways kids
+                  understand and remember.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.08s">
+                <div class="kids-feat-icon c2"><i class="fas fa-music"></i></div>
+                <h4>Praise & Worship</h4>
+                <p>
+                  Energetic, joyful worship sessions where kids learn to express their love for God
+                  through song.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.12s">
+                <div class="kids-feat-icon c3"><i class="fas fa-palette"></i></div>
+                <h4>Arts & Crafts</h4>
+                <p>
+                  Creative projects that reinforce Bible lessons and let kids express their
+                  God-given creativity.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.16s">
+                <div class="kids-feat-icon c4"><i class="fas fa-hands-praying"></i></div>
+                <h4>Prayer Time</h4>
+                <p>
+                  Teaching children to talk to God naturally, building a lifelong habit of prayer
+                  from a young age.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.2s">
+                <div class="kids-feat-icon c5"><i class="fas fa-users"></i></div>
+                <h4>Friendship & Fun</h4>
+                <p>
+                  Games, group activities and bonding moments that help kids build lasting
+                  Christ-centered friendships.
+                </p>
+              </div>
+              <div class="kids-feat reveal" style="transition-delay: 0.24s">
+                <div class="kids-feat-icon c6"><i class="fas fa-shield-alt"></i></div>
+                <h4>Safe Environment</h4>
+                <p>
+                  All our workers are trained, vetted and passionate about child safety and
+                  wellbeing always.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>     
+
+        <!-- AGE GROUPS -->
+        <div class="kids-section-alt">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">Who We Serve</span>
+              <h2 class="kids-sec-title reveal">Every Child Belongs Here</h2>
+              <p class="kids-sec-sub reveal" style="margin: 0 auto 3rem">
+                From babies to preteens — we have a specially designed programme for every stage of
+                your child's journey with God.
+              </p>
+            </div>
+            <div class="age-groups-grid">
+              <div class="age-card yellow reveal">
+                <span class="age-card-emoji">👶</span>
+                <div class="age-range">Ages 0 – 2</div>
+                <h3>Little Lambs</h3>
+                <p>
+                  A cozy, safe nursery where our littlest ones are loved and cared for while parents
+                  worship freely.
+                </p>
+              </div>
+              <div class="age-card orange reveal" style="transition-delay: 0.1s">
+                <span class="age-card-emoji">🧒</span>
+                <div class="age-range">Ages 3 – 5</div>
+                <h3>Sunshine Kids</h3>
+                <p>
+                  Songs, stories and Bible fun! Kids discover God's love through play, craft and
+                  simple Scripture.
+                </p>
+              </div>
+              <div class="age-card red reveal" style="transition-delay: 0.2s">
+                <span class="age-card-emoji">👦</span>
+                <div class="age-range">Ages 6 – 9</div>
+                <h3>Kingdom Explorers</h3>
+                <p>
+                  Adventure-based Bible lessons, memory verses, worship and exciting activities that
+                  build faith.
+                </p>
+              </div>
+              <div class="age-card green reveal" style="transition-delay: 0.3s">
+                <span class="age-card-emoji">🧑</span>
+                <div class="age-range">Ages 10 – 12</div>
+                <h3>Future Leaders</h3>
+                <p>
+                  Deeper Bible study, leadership training and mentorship preparing preteens to live
+                  boldly for Christ.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- KIDS GALLERY -->
+        <div class="kids-section">
+          <div class="kids-sec-inner">
+            <div style="text-align: center">
+              <span class="kids-sec-tag reveal">Moments & Memories</span>
+              <h2 class="kids-sec-title reveal">Look at All the Fun! 📸</h2>
+              <p class="kids-sec-sub reveal" style="margin: 0 auto 2.5rem">
+                Smiles, laughter, worship and friendships — this is what Sunday looks like for our
+                kids!
+              </p>
+            </div>
+            <div class="kids-gal-grid reveal">
+              <div
+                class="kids-gal-item span2x2"
+                style="background: linear-gradient(135deg, #ff6b6b7b, #ffa94d61), url('assets/img/KINGS_KIDZ.jpg') center;"
+              >
+                <div class="kids-gal-inner">🙌</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div
+                class="kids-gal-item"
+                style="background: linear-gradient(135deg, #ffd43b, #ffa94d)"
+              >
+                <div class="kids-gal-inner">🎨</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div
+                class="kids-gal-item"
+                style="background: linear-gradient(135deg, #51cf66, #2f9e44)"
+              >
+                <div class="kids-gal-inner">📖</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div
+                class="kids-gal-item"
+                style="background: linear-gradient(135deg, #339af0, #1864ab)"
+              >
+                <div class="kids-gal-inner">🎵</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div
+                class="kids-gal-item"
+                style="background: linear-gradient(135deg, #cc5de8, #862e9c)"
+              >
+                <div class="kids-gal-inner">🙏</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div
+                class="kids-gal-item span2x1"
+                style="background: linear-gradient(135deg, #ff6b6b, #ffd43b)"
+              >
+                <div class="kids-gal-inner">👫</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div
+                class="kids-gal-item"
+                style="background: linear-gradient(135deg, #ffa94d, #ff6b6b)"
+              >
+                <div class="kids-gal-inner">⭐</div>
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+            </div>
+            <!-- <p
+              class="reveal"
+              style="
+                text-align: center;
+                margin-top: 1.5rem;
+                font-size: 0.85rem;
+                color: var(--text3);
+              "
+            >
+              <i class="fas fa-image" style="color: #ff6b6b; margin-right: 6px"></i>
+              Replace the placeholders above with real photos from your kids ministry
+            </p> -->
+          </div>
+        </div>
+
+        <!-- WELCOME NOTE -->
+        <div class="kids-section-alt">
           <div class="kids-sec-inner">
             <div
               style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center"
@@ -4720,221 +5082,7 @@
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- AGE GROUPS -->
-        <div class="kids-section-alt">
-          <div class="kids-sec-inner">
-            <div style="text-align: center">
-              <span class="kids-sec-tag reveal">Who We Serve</span>
-              <h2 class="kids-sec-title reveal">Every Child Belongs Here</h2>
-              <p class="kids-sec-sub reveal" style="margin: 0 auto 3rem">
-                From babies to preteens — we have a specially designed programme for every stage of
-                your child's journey with God.
-              </p>
-            </div>
-            <div class="age-groups-grid">
-              <div class="age-card yellow reveal">
-                <span class="age-card-emoji">👶</span>
-                <div class="age-range">Ages 0 – 2</div>
-                <h3>Little Lambs</h3>
-                <p>
-                  A cozy, safe nursery where our littlest ones are loved and cared for while parents
-                  worship freely.
-                </p>
-              </div>
-              <div class="age-card orange reveal" style="transition-delay: 0.1s">
-                <span class="age-card-emoji">🧒</span>
-                <div class="age-range">Ages 3 – 5</div>
-                <h3>Sunshine Kids</h3>
-                <p>
-                  Songs, stories and Bible fun! Kids discover God's love through play, craft and
-                  simple Scripture.
-                </p>
-              </div>
-              <div class="age-card red reveal" style="transition-delay: 0.2s">
-                <span class="age-card-emoji">👦</span>
-                <div class="age-range">Ages 6 – 9</div>
-                <h3>Kingdom Explorers</h3>
-                <p>
-                  Adventure-based Bible lessons, memory verses, worship and exciting activities that
-                  build faith.
-                </p>
-              </div>
-              <div class="age-card green reveal" style="transition-delay: 0.3s">
-                <span class="age-card-emoji">🧑</span>
-                <div class="age-range">Ages 10 – 12</div>
-                <h3>Future Leaders</h3>
-                <p>
-                  Deeper Bible study, leadership training and mentorship preparing preteens to live
-                  boldly for Christ.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- WHAT WE DO -->
-        <div class="kids-section">
-          <div class="kids-sec-inner">
-            <div style="text-align: center">
-              <span class="kids-sec-tag reveal">What We Do</span>
-              <h2 class="kids-sec-title reveal">Fun + Faith = 🔥</h2>
-              <p class="kids-sec-sub reveal" style="margin: 0 auto">
-                Every Sunday is packed with activities that make kids excited to come back!
-              </p>
-            </div>
-            <div class="kids-features-grid">
-              <div class="kids-feat reveal">
-                <div class="kids-feat-icon c1"><i class="fas fa-bible"></i></div>
-                <h4>Bible Stories</h4>
-                <p>
-                  Exciting, interactive lessons that bring God's Word to life in ways kids
-                  understand and remember.
-                </p>
-              </div>
-              <div class="kids-feat reveal" style="transition-delay: 0.08s">
-                <div class="kids-feat-icon c2"><i class="fas fa-music"></i></div>
-                <h4>Praise & Worship</h4>
-                <p>
-                  Energetic, joyful worship sessions where kids learn to express their love for God
-                  through song.
-                </p>
-              </div>
-              <div class="kids-feat reveal" style="transition-delay: 0.12s">
-                <div class="kids-feat-icon c3"><i class="fas fa-palette"></i></div>
-                <h4>Arts & Crafts</h4>
-                <p>
-                  Creative projects that reinforce Bible lessons and let kids express their
-                  God-given creativity.
-                </p>
-              </div>
-              <div class="kids-feat reveal" style="transition-delay: 0.16s">
-                <div class="kids-feat-icon c4"><i class="fas fa-hands-praying"></i></div>
-                <h4>Prayer Time</h4>
-                <p>
-                  Teaching children to talk to God naturally, building a lifelong habit of prayer
-                  from a young age.
-                </p>
-              </div>
-              <div class="kids-feat reveal" style="transition-delay: 0.2s">
-                <div class="kids-feat-icon c5"><i class="fas fa-users"></i></div>
-                <h4>Friendship & Fun</h4>
-                <p>
-                  Games, group activities and bonding moments that help kids build lasting
-                  Christ-centered friendships.
-                </p>
-              </div>
-              <div class="kids-feat reveal" style="transition-delay: 0.24s">
-                <div class="kids-feat-icon c6"><i class="fas fa-shield-alt"></i></div>
-                <h4>Safe Environment</h4>
-                <p>
-                  All our workers are trained, vetted and passionate about child safety and
-                  wellbeing always.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- SCHEDULE -->
-        <div class="kids-section-alt" id="kids-schedule">
-          <div class="kids-sec-inner">
-            <div style="text-align: center">
-              <span class="kids-sec-tag reveal">When We Meet</span>
-              <h2 class="kids-sec-title reveal">Kids Programme Schedule</h2>
-            </div>
-            <div
-              class="reveal"
-              style="
-                max-width: 520px;
-                margin: 2rem auto 0;
-                background: white;
-                border-radius: 18px;
-                padding: 2rem;
-                display: flex;
-                align-items: center;
-                gap: 1.5rem;
-                box-shadow: 0 8px 32px rgba(255, 107, 107, 0.1);
-                border: 2px solid #ffd43b;
-              "
-            >
-              <div
-                style="
-                  width: 64px;
-                  height: 64px;
-                  border-radius: 16px;
-                  background: linear-gradient(135deg, #ffd43b, #ffa94d);
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  flex-shrink: 0;
-                "
-              >
-                <i class="fas fa-sun" style="color: white; font-size: 1.6rem"></i>
-              </div>
-              <div>
-                <div
-                  style="
-                    font-size: 0.7rem;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.1em;
-                    color: #ff6b6b;
-                    margin-bottom: 0.2rem;
-                  "
-                >
-                  Every Sunday
-                </div>
-                <div
-                  style="
-                    font-size: 1.15rem;
-                    font-weight: 700;
-                    color: var(--text);
-                    margin-bottom: 0.5rem;
-                  "
-                >
-                  Sunday Kids Church
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 0.25rem">
-                  <span
-                    style="
-                      font-size: 0.82rem;
-                      color: var(--text3);
-                      display: flex;
-                      align-items: center;
-                      gap: 0.4rem;
-                    "
-                    ><i class="fas fa-clock" style="color: #ff6b6b; width: 12px"></i> 10:00 AM –
-                    12:30 PM</span
-                  >
-                  <span
-                    style="
-                      font-size: 0.82rem;
-                      color: var(--text3);
-                      display: flex;
-                      align-items: center;
-                      gap: 0.4rem;
-                    "
-                    ><i class="fas fa-map-marker-alt" style="color: #ff6b6b; width: 12px"></i> Kids
-                    Hall, Church Building</span
-                  >
-                  <span
-                    style="
-                      font-size: 0.82rem;
-                      color: var(--text3);
-                      display: flex;
-                      align-items: center;
-                      gap: 0.4rem;
-                    "
-                    ><i class="fas fa-child" style="color: #ff6b6b; width: 12px"></i> Ages 0 – 12 ·
-                    Walk-ins welcome!</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div>   
 
         <!-- CTA -->
         <div class="kids-cta">
