@@ -1861,42 +1861,460 @@
       }
 
       /* GALLERY */
-      .gal-grid {
+      /* ── Improved gallery grid — uniform row heights ── */
+      .gal-grid-v2 {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(3, 190px);
+        grid-auto-rows: 220px; /* every row the same height — no more tiny last item */
         gap: 0.9rem;
-        margin-top: 2.75rem;
       }
-      .gal-item {
+      .gal-item-v2 {
         border-radius: 12px;
         overflow: hidden;
         cursor: pointer;
         position: relative;
         transition: transform 0.3s;
       }
-      .gal-item:hover {
+      .gal-item-v2:hover {
         transform: scale(1.02);
         z-index: 5;
       }
-      .gal-item:hover .gal-ov {
+      .gal-item-v2:hover .gal-ov {
         opacity: 1;
       }
-      .gal-item:nth-child(1) {
-        grid-column: span 2;
-        grid-row: span 2;
-      }
-      .gal-item:nth-child(4) {
-        grid-column: span 2;
-      }
-      .gal-inner {
+      .gal-inner-v2 {
         width: 100%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 2.5rem;
+        font-size: 2.8rem;
       }
+      @media (max-width: 900px) {
+        .gal-grid-v2 {
+          grid-template-columns: 1fr 1fr;
+          grid-auto-rows: 180px;
+        }
+        .gal-item-v2[style*="span 2"] {
+          grid-column: span 1 !important;
+          grid-row: span 1 !important;
+        }
+      }
+      @media (max-width: 600px) {
+        .gal-grid-v2 {
+          grid-auto-rows: 150px;
+        }
+      }
+
+      /* ── Album year cards ── */
+      .album-years-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 1rem;
+      }
+      .album-year-card {
+        border-radius: 16px;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        cursor: pointer;
+        border: 1.5px solid var(--border2);
+        background: var(--card-bg);
+        transition: all 0.28s;
+        position: relative;
+        overflow: hidden;
+      }
+      .album-year-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        opacity: 0;
+        transition: opacity 0.28s;
+      }
+      .album-year-card:hover::before,
+      .album-year-card.active-year::before {
+        opacity: 1;
+      }
+      .album-year-card > * {
+        position: relative;
+        z-index: 1;
+        transition: color 0.2s;
+      }
+      .album-year-card:hover .album-year-num,
+      .album-year-card.active-year .album-year-num {
+        color: white;
+      }
+      .album-year-card:hover .album-year-count,
+      .album-year-card.active-year .album-year-count {
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .album-year-card:hover,
+      .album-year-card.active-year {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px var(--primary-glow);
+        border-color: var(--primary);
+      }
+      .album-year-icon {
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+      .album-year-num {
+        font-family: "Playfair Display", serif;
+        font-size: 1.85rem;
+        font-weight: 900;
+        color: var(--text);
+        line-height: 1;
+      }
+      .album-year-count {
+        font-size: 0.7rem;
+        color: var(--text3);
+        margin-top: 0.3rem;
+      }
+
+      /* ── Month panel ── */
+      .album-months-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.75rem;
+      }
+      .album-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0.45rem 1.1rem;
+        border-radius: 50px;
+        border: 1.5px solid var(--border2);
+        background: var(--surface2);
+        color: var(--text2);
+        font-family: "Outfit", sans-serif;
+        font-size: 0.83rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .album-back-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .album-year-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+      }
+      .album-months-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+        gap: 1rem;
+      }
+
+      /* ── Month card ── */
+      .album-month-card {
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1.5px solid var(--border2);
+        background: var(--card-bg);
+        transition: all 0.28s;
+        cursor: pointer;
+      }
+      .album-month-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary);
+      }
+      .album-month-thumb {
+        height: 130px;
+        position: relative;
+        overflow: hidden;
+      }
+      .album-month-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .album-month-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+      }
+      .album-month-placeholder span:first-child {
+        font-size: 2rem;
+        opacity: 0.6;
+      }
+      .album-month-placeholder span:last-child {
+        font-size: 0.62rem;
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .album-month-body {
+        padding: 0.8rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .album-month-name {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--text);
+      }
+      .album-month-count {
+        font-size: 0.72rem;
+        color: var(--text3);
+        margin-top: 0.05rem;
+      }
+      .album-month-arr {
+        color: var(--text3);
+        font-size: 0.8rem;
+        transition: color 0.2s;
+      }
+      .album-month-card:hover .album-month-arr {
+        color: var(--primary);
+      }
+
+      /* ── Month lightbox ── */
+      .album-lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 6000;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+      }
+      .album-lightbox.open {
+        display: flex;
+      }
+      .album-lb-inner {
+        background: var(--surface);
+        border-radius: 20px;
+        width: 100%;
+        max-width: 820px;
+        max-height: 88vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: mIn 0.28s ease;
+        border: 1px solid var(--border2);
+      }
+      .album-lb-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.35rem;
+        border-bottom: 1px solid var(--border2);
+        flex-shrink: 0;
+      }
+      .album-lb-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .album-lb-close {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid var(--border2);
+        background: var(--surface2);
+        color: var(--text2);
+        cursor: pointer;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .album-lb-close:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+      .album-lb-photos {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+        gap: 0.75rem;
+        padding: 1.25rem;
+        overflow-y: auto;
+        flex: 1;
+      }
+      .album-lb-photo {
+        border-radius: 10px;
+        overflow: hidden;
+        height: 145px;
+        cursor: pointer;
+        transition: transform 0.25s;
+      }
+      .album-lb-photo:hover {
+        transform: scale(1.04);
+      }
+      .album-lb-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .album-lb-photo-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        font-size: 1.6rem;
+      }
+      .album-lb-empty {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 3rem;
+        color: var(--text3);
+        text-align: center;
+      }
+      .album-lb-empty i {
+        font-size: 2.5rem;
+        opacity: 0.25;
+      }
+      .album-lb-empty small {
+        font-size: 0.8rem;
+        color: var(--text3);
+      }
+      /* ── Full-screen image viewer ── */
+      .img-viewer {
+        position: fixed;
+        inset: 0;
+        z-index: 8000;
+        background: rgba(0, 0, 0, 0.95);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        cursor: zoom-out;
+      }
+      .img-viewer.open {
+        display: flex;
+      }
+
+      .img-viewer-inner {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        cursor: default;
+      }
+
+      .img-viewer-img {
+        max-width: 100%;
+        max-height: 80vh;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+        animation: mIn 0.25s ease;
+        display: block;
+      }
+
+      .img-viewer-caption {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 0.88rem;
+        text-align: center;
+        font-family: "Outfit", sans-serif;
+        max-width: 520px;
+      }
+
+      .img-viewer-close {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        z-index: 8001;
+      }
+      .img-viewer-close:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      /* prev / next arrows */
+      .img-viewer-prev,
+      .img-viewer-next {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        z-index: 8001;
+      }
+      .img-viewer-prev {
+        left: 1.25rem;
+      }
+      .img-viewer-next {
+        right: 1.25rem;
+      }
+      .img-viewer-prev:hover,
+      .img-viewer-next:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+      .img-viewer-prev.hidden,
+      .img-viewer-next.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* counter e.g. "2 / 5" */
+      .img-viewer-counter {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.78rem;
+        font-family: "Outfit", sans-serif;
+        letter-spacing: 0.08em;
+        z-index: 8001;
+      }
+
+      /* make photos in the grid look clickable */
+      .album-lb-photo {
+        cursor: zoom-in;
+      }
+
       .g1 {
         background: linear-gradient(135deg, #c94e38, #8b3a2a);
       }
@@ -2674,10 +3092,11 @@
       }
 
       /* KIDS GALLERY */
+      /* KIDS GALLERY RESPONSIVE */
       .kids-gal-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(2, 200px);
+        grid-auto-rows: 200px;
         gap: 0.9rem;
       }
       .kids-gal-item {
@@ -2698,17 +3117,6 @@
         grid-column: span 2;
         grid-row: span 2;
       }
-      .kids-gal-item.span2x1 {
-        grid-column: span 2;
-      }
-      .kids-gal-inner {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-      }
       .kids-gal-ov {
         position: absolute;
         inset: 0;
@@ -2723,24 +3131,79 @@
         border-radius: 16px;
       }
 
+      /* TABLET — 2 columns, everything spans 1 */
       @media (max-width: 900px) {
         .kids-gal-grid {
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: auto;
+          grid-template-columns: repeat(2, 1fr);
+          grid-auto-rows: 200px;
         }
-        .kids-gal-item.span2x2,
-        .kids-gal-item.span2x1 {
-          grid-column: span 1;
+        .kids-gal-item.span2x2 {
+          grid-column: span 2;
           grid-row: span 1;
         }
+        .kids-gal-item[style*="span 2"],
+        .kids-gal-item[style*="span 3"] {
+          grid-column: span 2 !important;
+        }
+        .kids-gal-item[style*="span 1"] {
+          grid-column: span 1 !important;
+        }
       }
+
+      /* MOBILE — 2 columns, shorter rows, no spanning */
       @media (max-width: 600px) {
         .kids-gal-grid {
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: auto;
+          grid-template-columns: repeat(2, 1fr);
+          grid-auto-rows: 150px;
+          gap: 0.6rem;
         }
-        .kids-gal-item {
-          height: 140px;
+        .kids-gal-item.span2x2,
+        .kids-gal-item[style*="span 2"],
+        .kids-gal-item[style*="span 3"] {
+          grid-column: span 2 !important;
+          grid-row: span 1 !important;
+        }
+        .kids-gal-item[style*="span 1"] {
+          grid-column: span 1 !important;
+        }
+      }
+
+      /* VERY SMALL — single column */
+      @media (max-width: 380px) {
+        .kids-gal-grid {
+          grid-template-columns: 1fr;
+          grid-auto-rows: 200px;
+        }
+        .kids-gal-item.span2x2,
+        .kids-gal-item[style*="span 2"],
+        .kids-gal-item[style*="span 3"],
+        .kids-gal-item[style*="span 1"] {
+          grid-column: span 1 !important;
+          grid-row: span 1 !important;
+        }
+      }
+
+      .kids-welcome-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+      }
+
+      @media (max-width: 900px) {
+        .kids-welcome-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .kids-welcome-grid {
+          gap: 1.5rem;
+        }
+
+        .kids-welcome-grid .kids-sec-title {
+          font-size: 1.6rem;
         }
       }
 
@@ -4086,10 +4549,11 @@
 
     <!-- ============================= GALLERY ============================= -->
     <div class="page" id="page-gallery">
+      <!-- header -->
       <section style="background: var(--bg); padding-top: 8rem">
         <div class="sec-inner">
           <div style="text-align: center; margin-bottom: 0.5rem">
-            <span class="sec-tag reveal">Memories & Moments</span>
+            <span class="sec-tag reveal">Memories &amp; Moments</span>
             <h1 class="sec-title reveal" style="font-size: clamp(2.5rem, 6vw, 4rem)">
               Our Gallery
             </h1>
@@ -4098,6 +4562,8 @@
               Realm of Glory Surulere family together.
             </p>
           </div>
+
+          <!-- filter buttons -->
           <div
             style="
               display: flex;
@@ -4144,43 +4610,118 @@
               Events
             </button>
           </div>
-          <div class="gal-grid">
-            <div class="gal-item reveal" data-cat="worship">
-              <div class="gal-inner g1">🙌</div>
+
+          <!-- ── FIXED GRID — every cell the same height ── -->
+          <div class="gal-grid-v2">
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="worship"
+              style="grid-column: span 2; grid-row: span 2"
+              onclick="openGalViewer(0)"
+            >
+              <div class="gal-inner-v2 g1">🙌</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.05s" data-cat="worship">
-              <div class="gal-inner g2">🎵</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="worship"
+              style="transition-delay: 0.05s"
+              onclick="openGalViewer(1)"
+            >
+              <div class="gal-inner-v2 g2">🎵</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.1s" data-cat="community">
-              <div class="gal-inner g3">👨‍👩‍👧‍👦</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="community"
+              style="transition-delay: 0.1s"
+              onclick="openGalViewer(2)"
+            >
+              <div class="gal-inner-v2 g3">👨‍👩‍👧‍👦</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.15s" data-cat="community">
-              <div class="gal-inner g4">🕊️</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="community"
+              style="transition-delay: 0.15s; grid-column: span 2"
+              onclick="openGalViewer(3)"
+            >
+              <div class="gal-inner-v2 g4">🕊️</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.2s" data-cat="worship">
-              <div class="gal-inner g5">🎺</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="worship"
+              style="transition-delay: 0.2s"
+              onclick="openGalViewer(4)"
+            >
+              <div class="gal-inner-v2 g5">🎺</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.25s" data-cat="outreach">
-              <div class="gal-inner g6">🤝</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="outreach"
+              style="transition-delay: 0.25s"
+              onclick="openGalViewer(5)"
+            >
+              <div class="gal-inner-v2 g6">🤝</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.3s" data-cat="events">
-              <div class="gal-inner g1">⛪</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="events"
+              style="transition-delay: 0.3s"
+              onclick="openGalViewer(6)"
+            >
+              <div class="gal-inner-v2 g1">⛪</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.35s" data-cat="community">
-              <div class="gal-inner g2">📖</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="community"
+              style="transition-delay: 0.35s"
+              onclick="openGalViewer(7)"
+            >
+              <div class="gal-inner-v2 g2">📖</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
-            <div class="gal-item reveal" style="transition-delay: 0.4s" data-cat="events">
-              <div class="gal-inner g3">✝️</div>
+            <div
+              class="gal-item-v2 reveal"
+              data-cat="events"
+              style="transition-delay: 0.4s"
+              onclick="openGalViewer(8)"
+            >
+              <div class="gal-inner-v2 g3">✝️</div>
               <div class="gal-ov"><i class="fas fa-expand"></i></div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ALBUMS SECTION ── -->
+      <section style="background: var(--bg2); padding-top: 4rem">
+        <div class="sec-inner">
+          <div style="text-align: center; margin-bottom: 2.5rem">
+            <span class="sec-tag reveal">Year By Year</span>
+            <h2 class="sec-title reveal">Albums</h2>
+            <p class="sec-sub reveal" style="margin: 0 auto">
+              Browse our church journey from 2018 to today — click a year, then a month to see its
+              memories.
+            </p>
+          </div>
+
+          <!-- year cards -->
+          <div class="album-years-row reveal" id="albumYearsRow"></div>
+
+          <!-- month panel (hidden until a year is clicked) -->
+          <div id="albumMonthsWrap" style="display: none; margin-top: 2.5rem">
+            <div class="album-months-header">
+              <button class="album-back-btn" onclick="closeAlbumYear()">
+                <i class="fas fa-arrow-left"></i> All Years
+              </button>
+              <h3 class="album-year-title" id="albumYearTitle"></h3>
+            </div>
+            <div class="album-months-grid" id="albumMonthsGrid"></div>
           </div>
         </div>
       </section>
@@ -4792,81 +5333,78 @@
               </p>
             </div>
             <div class="kids-gal-grid reveal">
-              <div
-                class="kids-gal-item span2x2"
-                style="
-                  background:
-                    linear-gradient(135deg, #ff6b6b7b, #ffa94d61),
-                    url(&quot;assets/img/KINGS_KIDZ.jpg&quot;) center;
-                "
-              >
-                <div class="kids-gal-inner">🙌</div>
+              <div class="kids-gal-item span2x2" onclick="openKidsViewer(0)">
+                <img
+                  src="assets/img/KINGS_KIDZ.jpg"
+                  alt="Kids Worship"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
-              <div
-                class="kids-gal-item"
-                style="background: linear-gradient(135deg, #ffd43b, #ffa94d)"
-              >
-                <div class="kids-gal-inner">🎨</div>
+              <div class="kids-gal-item" onclick="openKidsViewer(1)">
+                <img
+                  src="assets/img/KINGS_KIDZ_1.jpg"
+                  alt="Kids 1"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
-              <div
-                class="kids-gal-item"
-                style="background: linear-gradient(135deg, #51cf66, #2f9e44)"
-              >
-                <div class="kids-gal-inner">📖</div>
+              <div class="kids-gal-item" onclick="openKidsViewer(2)">
+                <img
+                  src="assets/img/KINGS_KIDZ_2.jpg"
+                  alt="Kids 2"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
-              <div
-                class="kids-gal-item"
-                style="background: linear-gradient(135deg, #339af0, #1864ab)"
-              >
-                <div class="kids-gal-inner">🎵</div>
+              <div class="kids-gal-item" onclick="openKidsViewer(3)">
+                <img
+                  src="assets/img/KINGS_KIDZ_3.jpg"
+                  alt="Kids 3"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
-              <div
-                class="kids-gal-item"
-                style="background: linear-gradient(135deg, #cc5de8, #862e9c)"
-              >
-                <div class="kids-gal-inner">🙏</div>
+              <div class="kids-gal-item" onclick="openKidsViewer(4)">
+                <img
+                  src="assets/img/KINGS_KIDZ_4.jpg"
+                  alt="Kids 4"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
-              <div
-                class="kids-gal-item span2x1"
-                style="background: linear-gradient(135deg, #ff6b6b, #ffd43b)"
-              >
-                <div class="kids-gal-inner">👫</div>
+              <div class="kids-gal-item" onclick="openKidsViewer(5)">
+                <img
+                  src="assets/img/KINGS_KIDZ_5.jpg"
+                  alt="Kids 5"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
-              <div
-                class="kids-gal-item"
-                style="background: linear-gradient(135deg, #ffa94d, #ff6b6b)"
-              >
-                <div class="kids-gal-inner">⭐</div>
+              <div class="kids-gal-item" onclick="openKidsViewer(6)">
+                <img
+                  src="assets/img/KINGS_KIDZ_6.jpg"
+                  alt="Kids 6"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
+                <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
+              </div>
+              <div class="kids-gal-item" onclick="openKidsViewer(7)" style="grid-column: span 2">
+                <img
+                  src="assets/img/KINGS_KIDZ_7.jpg"
+                  alt="Kids 7"
+                  style="width: 100%; height: 100%; object-fit: cover; display: block"
+                />
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
               </div>
             </div>
-            <!-- <p
-              class="reveal"
-              style="
-                text-align: center;
-                margin-top: 1.5rem;
-                font-size: 0.85rem;
-                color: var(--text3);
-              "
-            >
-              <i class="fas fa-image" style="color: #ff6b6b; margin-right: 6px"></i>
-              Replace the placeholders above with real photos from your kids ministry
-            </p> -->
           </div>
         </div>
 
         <!-- WELCOME NOTE -->
         <div class="kids-section-alt">
           <div class="kids-sec-inner">
-            <div
-              style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center"
-            >
+            <div class="kids-welcome-grid">
               <div class="reveal">
                 <span class="kids-sec-tag">Just Show Up!</span>
                 <h2 class="kids-sec-title">
@@ -5382,7 +5920,7 @@
           virtual: false,
           icon: "fas fa-book-open",
           desc: "For every new believer, new member and those that want to lay a solid foundation in their Christian life. Come and be grounded in the Word.",
-          img: "assets/img/believers.jpg", // 👈 Add image path here e.g. "assets/img/believers-class.jpg"
+          img: "assets/img/believers.jpg",
         },
         {
           id: 2,
@@ -5393,7 +5931,7 @@
           virtual: false,
           icon: "fas fa-hands-helping",
           desc: "Join the Ambassadors and other brethren as we reach out to the Shitta community with the love of Christ.",
-          img: "assets/img/Shitta.jpeg", // 👈 Add image path here
+          img: "assets/img/Shitta.jpeg",
         },
         {
           id: 3,
@@ -5404,7 +5942,7 @@
           virtual: false,
           icon: "fas fa-sun",
           desc: "A one-hour spiritual recharge to seek God early for all-round victory, breakthrough and deliverance. Receive the Word that will carry you through the week.",
-          img: "assets/img/Ascendancy in the morning.jpeg", // 👈 Add image path here
+          img: "assets/img/Ascendancy in the morning.jpeg",
         },
         {
           id: 4,
@@ -5415,7 +5953,7 @@
           virtual: true,
           icon: "fas fa-fire",
           desc: "Our Saturday virtual prayer meeting. Storm the gates of heaven with us! Kindly attend and invite someone to join this powerful prayer time.",
-          img: "assets/img/Powerhouse.jpg", // 👈 Add image path here
+          img: "assets/img/Powerhouse.jpg",
         },
       ];
 
@@ -5456,6 +5994,7 @@
             renderHomeEvents();
             renderHomeMeetings();
           }
+          if (name === "gallery") setTimeout(renderAlbumYears, 350);
           setTimeout(initReveal, 100);
           transition.classList.remove("show");
         }, 280);
@@ -5487,26 +6026,22 @@
 
       // ===================== PARALLAX =====================
       function handleParallax() {
-        const sy = window.scrollY;
         ["pqBg1", "pqBg2"].forEach((id) => {
           const el = document.getElementById(id);
           if (!el) return;
           const section = el.closest(".pq");
           if (!section) return;
           const rect = section.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight && rect.bottom > 0;
-          if (!inView) return;
+          if (rect.top >= window.innerHeight || rect.bottom <= 0) return;
           const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
           el.style.transform = `translateY(${(progress - 0.5) * 900}px)`;
         });
-
         const ctaBg = document.getElementById("ctaBg");
         if (ctaBg) {
           const section = ctaBg.closest(".cta-pq");
           if (!section) return;
           const rect = section.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight && rect.bottom > 0;
-          if (!inView) return;
+          if (rect.top >= window.innerHeight || rect.bottom <= 0) return;
           const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
           ctaBg.style.transform = `translateY(${(progress - 0.5) * 500}px)`;
         }
@@ -5569,13 +6104,13 @@
       function buildSermonCard(s) {
         const hasAudio = s.audio && s.audio.length > 0;
         return `<div class="card reveal" onclick="openSermon(${s.id})">
-          <div class="card-img ${s.color}" style="font-size:3.5rem">${s.icon}<div class="card-tag">${s.topic}</div></div>
-          <div class="card-body">
-            <h3>${s.title}</h3><p>${s.desc}</p>
-            <div class="card-meta"><span><i class="fas fa-user"></i> ${s.speaker}</span><span><i class="fas fa-clock"></i> ${s.duration}</span></div>
-            <div class="card-meta" style="margin-top:0.35rem"><span><i class="fas fa-calendar"></i> ${s.date}</span></div>
-            <button class="play-btn"><i class="fas fa-${hasAudio ? "headphones" : "lock"}"></i> ${hasAudio ? "Listen Now" : "Coming Soon"}</button>
-          </div></div>`;
+    <div class="card-img ${s.color}" style="font-size:3.5rem">${s.icon}<div class="card-tag">${s.topic}</div></div>
+    <div class="card-body">
+      <h3>${s.title}</h3><p>${s.desc}</p>
+      <div class="card-meta"><span><i class="fas fa-user"></i> ${s.speaker}</span><span><i class="fas fa-clock"></i> ${s.duration}</span></div>
+      <div class="card-meta" style="margin-top:0.35rem"><span><i class="fas fa-calendar"></i> ${s.date}</span></div>
+      <button class="play-btn"><i class="fas fa-${hasAudio ? "headphones" : "lock"}"></i> ${hasAudio ? "Listen Now" : "Coming Soon"}</button>
+    </div></div>`;
       }
       function renderHomeSermons() {
         const el = document.getElementById("homeSermons");
@@ -5603,10 +6138,10 @@
       // ===================== EVENTS =====================
       function buildEventItem(e, onclick) {
         return `<div class="ev-item reveal" ${onclick ? `onclick="${onclick}"` : ""}>
-          <div class="ev-date"><div class="ev-d">${e.day}</div><div class="ev-m">${e.mon}</div></div>
-          <div class="ev-info"><h4>${e.name}</h4><p>${e.desc}</p>
-          <div class="ev-meta"><span><i class="fas fa-clock"></i> ${e.time}</span><span><i class="fas fa-map-marker-alt"></i> ${e.location}</span></div></div>
-          <i class="fas fa-chevron-right ev-arr"></i></div>`;
+    <div class="ev-date"><div class="ev-d">${e.day}</div><div class="ev-m">${e.mon}</div></div>
+    <div class="ev-info"><h4>${e.name}</h4><p>${e.desc}</p>
+    <div class="ev-meta"><span><i class="fas fa-clock"></i> ${e.time}</span><span><i class="fas fa-map-marker-alt"></i> ${e.location}</span></div></div>
+    <i class="fas fa-chevron-right ev-arr"></i></div>`;
       }
       function renderHomeEvents() {
         const el = document.getElementById("homeEvents");
@@ -5629,39 +6164,33 @@
       function buildMeetingCard(m) {
         const imgContent = m.img
           ? `<img src="${m.img}" alt="${m.name}" />`
-          : `<div class="meeting-img-placeholder">
-               <i class="${m.icon}"></i>
-               <span>Add graphic image here</span>
-             </div>`;
+          : `<div class="meeting-img-placeholder"><i class="${m.icon}"></i><span>Add graphic image here</span></div>`;
         const virtualTag = m.virtual
           ? `<div class="meeting-virtual-tag"><i class="fas fa-wifi" style="margin-right:4px;font-size:0.62rem;"></i> Virtual</div>`
           : "";
         return `
-          <div class="meeting-card reveal">
-            <div class="meeting-img">
-              ${imgContent}
-              <div class="meeting-day-tag">${m.day}</div>
-              ${virtualTag}
-            </div>
-            <div class="meeting-body">
-              <div class="meeting-name">${m.name}</div>
-              <div class="meeting-desc">${m.desc}</div>
-              <div class="meeting-footer">
-                <div class="meeting-meta-row"><i class="fas fa-clock"></i><span>${m.time}</span></div>
-                <div class="meeting-meta-row"><i class="fas fa-map-marker-alt"></i><span>${m.location}</span></div>
-              </div>
-            </div>
-          </div>`;
+    <div class="meeting-card reveal">
+      <div class="meeting-img">
+        ${imgContent}
+        <div class="meeting-day-tag">${m.day}</div>
+        ${virtualTag}
+      </div>
+      <div class="meeting-body">
+        <div class="meeting-name">${m.name}</div>
+        <div class="meeting-desc">${m.desc}</div>
+        <div class="meeting-footer">
+          <div class="meeting-meta-row"><i class="fas fa-clock"></i><span>${m.time}</span></div>
+          <div class="meeting-meta-row"><i class="fas fa-map-marker-alt"></i><span>${m.location}</span></div>
+        </div>
+      </div>
+    </div>`;
       }
-
       function renderHomeMeetings() {
         const el = document.getElementById("homeMeetings");
         if (!el) return;
-        // Show first 3 on home (Sunday + Wednesday preview), all 4 shown on events
         el.innerHTML = MEETINGS.slice(0, 3).map(buildMeetingCard).join("");
         setTimeout(initReveal, 50);
       }
-
       function renderEventsMeetings() {
         const el = document.getElementById("eventsMeetings");
         if (!el) return;
@@ -5802,7 +6331,7 @@
 
       // ===================== GALLERY FILTER =====================
       function galFilter(cat, btn) {
-        document.querySelectorAll(".gal-grid .gal-item").forEach((item) => {
+        document.querySelectorAll(".gal-grid-v2 .gal-item-v2").forEach((item) => {
           item.style.display = cat === "all" || item.dataset.cat === cat ? "" : "none";
         });
         btn
@@ -5870,9 +6399,22 @@
           document.getElementById("siteLoader").classList.add("hide");
           setTimeout(initReveal, 200);
         }, 1500);
+
+        // close album lightbox on background click
+        const lb = document.getElementById("albumLightbox");
+        if (lb)
+          lb.addEventListener("click", (e) => {
+            if (e.target === lb) closeMonthLightbox();
+          });
+
+        // close image viewer on background click
+        const viewer = document.getElementById("imgViewer");
+        if (viewer)
+          viewer.addEventListener("click", (e) => {
+            if (e.target === viewer) closeImgViewer();
+          });
       });
 
-      // ===================== YOUTUBE LIVE CHECK =====================
       // ===================== YOUTUBE LIVE CHECK =====================
       const YT_CHANNEL_ID = "UCv19XyCX-r4FbBImxJ2gGQg";
       const YT_API_KEY = "AIzaSyCZ5zOKMhVnn4Lhpzix8mAkcOlgbgi6p7o";
@@ -5903,14 +6445,12 @@
           showStreamOff();
         }
       }
-
       function showStreamOff() {
         document.getElementById("streamOff").style.display = "flex";
         const frame = document.getElementById("liveFrame");
         frame.style.display = "none";
         frame.src = "";
       }
-
       function initLivestream() {
         checkYouTubeLive();
         setInterval(checkYouTubeLive, 120000);
@@ -5918,7 +6458,6 @@
 
       // ===================== SEARCH =====================
       const SEARCH_INDEX = [
-        // Pages
         {
           type: "page",
           title: "Home",
@@ -6001,9 +6540,6 @@
           page: "contact",
           keywords: "contact address phone email location office hours",
         },
-        // Sermons (dynamically built below)
-        // Events (dynamically built below)
-        // Meetings
         {
           type: "meeting",
           title: "Believers Foundation Class",
@@ -6040,7 +6576,6 @@
           page: "events",
           keywords: "powerhouse prayer saturday virtual online meeting",
         },
-        // Leadership
         {
           type: "person",
           title: "Pastor Kayode Ajala",
@@ -6077,7 +6612,6 @@
           page: "about",
           keywords: "catherine aligame assistant admin youth",
         },
-        // Info
         {
           type: "info",
           title: "Sunday Morning Service",
@@ -6142,8 +6676,6 @@
           keywords: "prayer request submit intercede healing family",
         },
       ];
-
-      // Add sermons to index
       SERMONS.forEach((s) => {
         SEARCH_INDEX.push({
           type: "sermon",
@@ -6156,8 +6688,6 @@
           keywords: (s.title + " " + s.speaker + " " + s.topic + " " + s.desc).toLowerCase(),
         });
       });
-
-      // Add events to index
       EVENTS.forEach((e) => {
         SEARCH_INDEX.push({
           type: "event",
@@ -6174,58 +6704,40 @@
         document.getElementById("searchOverlay").classList.add("open");
         setTimeout(() => document.getElementById("searchInput").focus(), 100);
       }
-
       function closeSearch() {
         document.getElementById("searchOverlay").classList.remove("open");
         document.getElementById("searchInput").value = "";
         resetSearchResults();
       }
-
       function closeSearchOut(e) {
         if (e.target === document.getElementById("searchOverlay")) closeSearch();
       }
-
       function resetSearchResults() {
-        document.getElementById("searchResults").innerHTML = `
-    <div class="search-empty" id="searchEmpty">
-      <i class="fas fa-search"></i>
-      <p>Start typing to search...</p>
-    </div>`;
+        document.getElementById("searchResults").innerHTML =
+          `<div class="search-empty" id="searchEmpty"><i class="fas fa-search"></i><p>Start typing to search...</p></div>`;
       }
-
       function highlight(text, query) {
         if (!query) return text;
         const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         return text.replace(new RegExp(`(${escaped})`, "gi"), "<mark>$1</mark>");
       }
-
       function handleSearch(query) {
         const q = query.trim().toLowerCase();
         const container = document.getElementById("searchResults");
-
         if (!q) {
           resetSearchResults();
           return;
         }
-
-        const results = SEARCH_INDEX.filter((item) => {
-          return (
+        const results = SEARCH_INDEX.filter(
+          (item) =>
             item.title.toLowerCase().includes(q) ||
             item.sub.toLowerCase().includes(q) ||
-            item.keywords.includes(q)
-          );
-        });
-
+            item.keywords.includes(q),
+        );
         if (results.length === 0) {
-          container.innerHTML = `
-      <div class="search-no-results">
-        <i class="fas fa-search"></i>
-        No results found for "<strong>${query}</strong>"
-      </div>`;
+          container.innerHTML = `<div class="search-no-results"><i class="fas fa-search"></i>No results found for "<strong>${query}</strong>"</div>`;
           return;
         }
-
-        // Group by type
         const groups = {
           page: { label: "Pages", icon: "fa-file", items: [] },
           sermon: { label: "Sermons", icon: "fa-headphones", items: [] },
@@ -6234,47 +6746,32 @@
           person: { label: "People", icon: "fa-user", items: [] },
           info: { label: "Info", icon: "fa-info-circle", items: [] },
         };
-
         results.forEach((r) => {
           if (groups[r.type]) groups[r.type].items.push(r);
         });
-
         let html = "";
         Object.values(groups).forEach((group) => {
           if (group.items.length === 0) return;
           html += `<div class="search-section-label">${group.label}</div>`;
           group.items.forEach((item) => {
-            html += `
-        <div class="search-result-item" onclick="goToResult('${item.page}', ${item.sermonId || "null"})">
-          <div class="search-result-icon ${item.color}">
-            <i class="fas ${item.icon}"></i>
-          </div>
-          <div class="search-result-body">
-            <div class="search-result-title">${highlight(item.title, query)}</div>
-            <div class="search-result-sub">${item.sub}</div>
-          </div>
-          <i class="fas fa-arrow-right search-result-arrow"></i>
-        </div>`;
+            html += `<div class="search-result-item" onclick="goToResult('${item.page}', ${item.sermonId || "null"})">
+        <div class="search-result-icon ${item.color}"><i class="fas ${item.icon}"></i></div>
+        <div class="search-result-body">
+          <div class="search-result-title">${highlight(item.title, query)}</div>
+          <div class="search-result-sub">${item.sub}</div>
+        </div>
+        <i class="fas fa-arrow-right search-result-arrow"></i>
+      </div>`;
           });
         });
-
-        html += `
-    <div class="search-kbd">
-      <kbd>↵</kbd> to select &nbsp;·&nbsp; <kbd>Esc</kbd> to close
-    </div>`;
-
+        html += `<div class="search-kbd"><kbd>↵</kbd> to select &nbsp;·&nbsp; <kbd>Esc</kbd> to close</div>`;
         container.innerHTML = html;
       }
-
       function goToResult(page, sermonId) {
         closeSearch();
         showPage(page);
-        if (sermonId) {
-          setTimeout(() => openSermon(sermonId), 400);
-        }
+        if (sermonId) setTimeout(() => openSermon(sermonId), 400);
       }
-
-      // Keyboard shortcut: Ctrl+K or Cmd+K to open search
       document.addEventListener("keydown", (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === "k") {
           e.preventDefault();
@@ -6282,8 +6779,486 @@
         }
         if (e.key === "Escape") {
           closeSearch();
+          closeImgViewer();
         }
       });
+
+      // ===================== ALBUM DATA =====================
+      const ALBUM_GRADS = [
+        "linear-gradient(135deg,#c94e38,#8b3a2a)",
+        "linear-gradient(135deg,#2a4a6b,#1a2d40)",
+        "linear-gradient(135deg,#4a6b2a,#2d401a)",
+        "linear-gradient(135deg,#6b4a2a,#40301a)",
+        "linear-gradient(135deg,#4a2a6b,#2d1a40)",
+        "linear-gradient(135deg,#2a6b4a,#1a4030)",
+        "linear-gradient(135deg,#6b2a4a,#40182e)",
+        "linear-gradient(135deg,#2a566b,#1a3540)",
+        "linear-gradient(135deg,#6b6b2a,#40401a)",
+        "linear-gradient(135deg,#3a2a6b,#221a40)",
+        "linear-gradient(135deg,#6b2a2a,#401a1a)",
+        "linear-gradient(135deg,#2a6b6b,#1a4040)",
+      ];
+      const ALBUM_EMOJIS = ["🎊", "📖", "🙌", "✝️", "🕊️", "🎵", "🙏", "⛪", "🌟", "🎺", "🤝", "🎄"];
+
+      const ALBUM_DATA = {
+        2018: {
+          icon: "🌱",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [{ src: "", caption: "First Easter Service" }] },
+            May: { photos: [] },
+            June: { photos: [{ src: "", caption: "Church Launch" }] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [{ src: "", caption: "Christmas Celebration" }] },
+          },
+        },
+        2019: {
+          icon: "🔥",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [{ src: "", caption: "Easter 2019" }] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [{ src: "", caption: "Carol Service 2019" }] },
+          },
+        },
+        2020: {
+          icon: "🙏",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [] },
+          },
+        },
+        2021: {
+          icon: "✝️",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [{ src: "", caption: "Easter 2021" }] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [{ src: "", caption: "End of Year 2021" }] },
+          },
+        },
+        2022: {
+          icon: "🌟",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [] },
+          },
+        },
+        2023: {
+          icon: "🎺",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [] },
+          },
+        },
+        2024: {
+          icon: "🕊️",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [] },
+          },
+        },
+        2025: {
+          icon: "⚡",
+          months: {
+            January: { photos: [] },
+            February: { photos: [] },
+            March: { photos: [] },
+            April: { photos: [] },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [] },
+          },
+        },
+        2026: {
+          icon: "🌅",
+          months: {
+            January: {
+              photos: [
+                {
+                  src: "https://images.unsplash.com/photo-1438232992991-995b671e4668?w=600&q=80",
+                  caption: "January Worship Service",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=600&q=80",
+                  caption: "January Prayer Meeting",
+                },
+              ],
+            },
+            February: {
+              photos: [
+                {
+                  src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80",
+                  caption: "February Praise Night",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",
+                  caption: "February Community",
+                },
+              ],
+            },
+            March: {
+              photos: [
+                {
+                  src: "https://images.unsplash.com/photo-1548625149-720754002a5d?w=600&q=80",
+                  caption: "Palm Sunday Preparation",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",
+                  caption: "March Outreach",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1499956827185-0d63ee78a910?w=600&q=80",
+                  caption: "Easter Preparation 2026",
+                },
+              ],
+            },
+            April: {
+              photos: [
+                {
+                  src: "https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?w=600&q=80",
+                  caption: "Good Friday Service",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1504185945330-7a3ca1380535?w=600&q=80",
+                  caption: "Easter Bible Study",
+                },
+                {
+                  src: "https://images.unsplash.com/photo-1438232992991-995b671e4668?w=600&q=80",
+                  caption: "Easter Sunday Celebration",
+                },
+              ],
+            },
+            May: { photos: [] },
+            June: { photos: [] },
+            July: { photos: [] },
+            August: { photos: [] },
+            September: { photos: [] },
+            October: { photos: [] },
+            November: { photos: [] },
+            December: { photos: [] },
+          },
+        },
+      };
+
+      // ===================== ALBUM FUNCTIONS =====================
+      function renderAlbumYears() {
+        const row = document.getElementById("albumYearsRow");
+        if (!row || row.dataset.rendered) return;
+        row.dataset.rendered = "1";
+        const years = Object.keys(ALBUM_DATA).sort((a, b) => b - a);
+        row.innerHTML = years
+          .map((yr) => {
+            const d = ALBUM_DATA[yr];
+            const count = Object.values(d.months).reduce(
+              (n, m) => n + m.photos.filter((p) => p.src).length,
+              0,
+            );
+            return `<div class="album-year-card" onclick="openAlbumYear(${yr})">
+      <div class="album-year-icon">${d.icon}</div>
+      <div class="album-year-num">${yr}</div>
+      <div class="album-year-count">${count} photo${count !== 1 ? "s" : ""}</div>
+    </div>`;
+          })
+          .join("");
+      }
+
+      function openAlbumYear(yr) {
+        document
+          .querySelectorAll(".album-year-card")
+          .forEach((c) => c.classList.remove("active-year"));
+        document.querySelectorAll(".album-year-card").forEach((c) => {
+          if (c.querySelector(".album-year-num").textContent == yr) c.classList.add("active-year");
+        });
+        document.getElementById("albumYearTitle").textContent = yr + " — Year in Review";
+        const months = Object.keys(ALBUM_DATA[yr].months);
+        document.getElementById("albumMonthsGrid").innerHTML = months
+          .map((mon, idx) => {
+            const photos = ALBUM_DATA[yr].months[mon].photos;
+            const realCount = photos.filter((p) => p.src).length;
+            const firstReal = photos.find((p) => p.src);
+            const grad = ALBUM_GRADS[idx % ALBUM_GRADS.length];
+            const emoji = ALBUM_EMOJIS[idx % ALBUM_EMOJIS.length];
+            const thumb = firstReal
+              ? `<img src="${firstReal.src}" alt="${mon}" loading="lazy" />`
+              : `<div class="album-month-placeholder" style="background:${grad}"><span>${emoji}</span><span>No photos yet</span></div>`;
+            return `<div class="album-month-card" onclick="openMonthLightbox(${yr},'${mon}')">
+      <div class="album-month-thumb">${thumb}</div>
+      <div class="album-month-body">
+        <div>
+          <div class="album-month-name">${mon}</div>
+          <div class="album-month-count">${realCount} photo${realCount !== 1 ? "s" : ""}</div>
+        </div>
+        <i class="fas fa-chevron-right album-month-arr"></i>
+      </div>
+    </div>`;
+          })
+          .join("");
+        const wrap = document.getElementById("albumMonthsWrap");
+        wrap.style.display = "";
+        wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      function closeAlbumYear() {
+        document.getElementById("albumMonthsWrap").style.display = "none";
+        document
+          .querySelectorAll(".album-year-card")
+          .forEach((c) => c.classList.remove("active-year"));
+        document
+          .getElementById("albumYearsRow")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // ===================== MONTH LIGHTBOX =====================
+      let _viewerPhotos = [];
+      let _viewerIndex = 0;
+
+      function openMonthLightbox(yr, mon) {
+        const photos = ALBUM_DATA[yr].months[mon].photos;
+        document.getElementById("albumLbTitle").textContent = mon + " " + yr;
+        const grid = document.getElementById("albumLbPhotos");
+
+        if (!photos.length) {
+          grid.innerHTML = `<div class="album-lb-empty">
+      <i class="fas fa-camera"></i>
+      <p>No photos added yet for ${mon} ${yr}.</p>
+      <small>Add image paths to ALBUM_DATA in the script to display photos here.</small>
+    </div>`;
+        } else {
+          _viewerPhotos = photos.filter((p) => p.src);
+          grid.innerHTML = photos
+            .map((p, i) => {
+              const grad = ALBUM_GRADS[i % ALBUM_GRADS.length];
+              const emoji = ALBUM_EMOJIS[i % ALBUM_EMOJIS.length];
+              if (p.src) {
+                const viewerIdx = _viewerPhotos.findIndex((x) => x.src === p.src);
+                return `<div class="album-lb-photo" onclick="openImgViewer(${viewerIdx})">
+          <img src="${p.src}" alt="${p.caption || mon}" loading="lazy" />
+        </div>`;
+              }
+              return `<div class="album-lb-photo" style="cursor:default">
+        <div class="album-lb-photo-placeholder" style="background:${grad}">
+          <span>${emoji}</span>
+          <span style="font-size:.65rem;color:rgba(255,255,255,.6);text-align:center;padding:0 .5rem">${p.caption || "Photo"}</span>
+        </div>
+      </div>`;
+            })
+            .join("");
+        }
+
+        document.getElementById("albumLightbox").classList.add("open");
+      }
+
+      function closeMonthLightbox() {
+        document.getElementById("albumLightbox").classList.remove("open");
+      }
+
+      // ===================== IMAGE VIEWER =====================
+      function openImgViewer(idx) {
+        if (!_viewerPhotos.length) return;
+        _viewerIndex = idx;
+        _renderViewer();
+        document.getElementById("imgViewer").classList.add("open");
+      }
+
+      function _renderViewer() {
+        const p = _viewerPhotos[_viewerIndex];
+        document.getElementById("imgViewerImg").src = p.src;
+        document.getElementById("imgViewerCaption").textContent = p.caption || "";
+        document.getElementById("imgViewerCounter").textContent =
+          _viewerIndex + 1 + " / " + _viewerPhotos.length;
+        document.getElementById("imgViewerPrev").classList.toggle("hidden", _viewerIndex === 0);
+        document
+          .getElementById("imgViewerNext")
+          .classList.toggle("hidden", _viewerIndex === _viewerPhotos.length - 1);
+      }
+
+      function imgViewerPrev() {
+        if (_viewerIndex > 0) {
+          _viewerIndex--;
+          _renderViewer();
+        }
+      }
+      function imgViewerNext() {
+        if (_viewerIndex < _viewerPhotos.length - 1) {
+          _viewerIndex++;
+          _renderViewer();
+        }
+      }
+      function closeImgViewer() {
+        document.getElementById("imgViewer").classList.remove("open");
+      }
+
+      // ===================== MAIN GALLERY VIEWER =====================
+      const GAL_ITEMS = [
+        { label: "Worship — Hands Raised", cat: "worship" },
+        { label: "Music Ministry", cat: "worship" },
+        { label: "Church Family", cat: "community" },
+        { label: "The Dove of Peace", cat: "community" },
+        { label: "Trumpet Praise", cat: "worship" },
+        { label: "Community Outreach", cat: "outreach" },
+        { label: "Church Building", cat: "events" },
+        { label: "Bible Study", cat: "community" },
+        { label: "The Cross", cat: "events" },
+      ];
+
+      let _galIndex = 0;
+
+      function openGalViewer(idx) {
+        _galIndex = idx;
+        _renderGalViewer();
+        document.getElementById("imgViewer").classList.add("open");
+        // Override the viewer photos array so prev/next work
+        _viewerPhotos = GAL_ITEMS.map((g) => ({ src: "", caption: g.label }));
+        _viewerIndex = idx;
+        document.getElementById("imgViewerImg").style.display = "none";
+        document.getElementById("imgViewerCounter").textContent =
+          idx + 1 + " / " + GAL_ITEMS.length;
+        document.getElementById("imgViewerCaption").textContent = GAL_ITEMS[idx].label;
+        document.getElementById("imgViewerPrev").classList.toggle("hidden", idx === 0);
+        document
+          .getElementById("imgViewerNext")
+          .classList.toggle("hidden", idx === GAL_ITEMS.length - 1);
+      }
+
+      function _renderGalViewer() {
+        const item = GAL_ITEMS[_galIndex];
+        document.getElementById("imgViewerCaption").textContent = item.label;
+        document.getElementById("imgViewerCounter").textContent =
+          _galIndex + 1 + " / " + GAL_ITEMS.length;
+        document.getElementById("imgViewerPrev").classList.toggle("hidden", _galIndex === 0);
+        document
+          .getElementById("imgViewerNext")
+          .classList.toggle("hidden", _galIndex === GAL_ITEMS.length - 1);
+      }
+
+      // ===================== KIDS GALLERY VIEWER =====================
+      const KIDS_GAL_ITEMS = [
+        { label: "Kings Kidz", src: "assets/img/KINGS_KIDZ.jpg" },
+        { label: "Kings Kidz 1", src: "assets/img/KINGS_KIDZ_1.jpg" },
+        { label: "Kings Kidz 2", src: "assets/img/KINGS_KIDZ_2.jpg" },
+        { label: "Kings Kidz 3", src: "assets/img/KINGS_KIDZ_3.jpg" },
+        { label: "Kings Kidz 4", src: "assets/img/KINGS_KIDZ_4.jpg" },
+        { label: "Kings Kidz 5", src: "assets/img/KINGS_KIDZ_5.jpg" },
+        { label: "Kings Kidz 6", src: "assets/img/KINGS_KIDZ_6.jpg" },
+        { label: "Kings Kidz 7", src: "assets/img/KINGS_KIDZ_7.jpg" },
+      ];
+
+      let _kidsGalIndex = 0;
+
+      function openKidsViewer(idx) {
+        _kidsGalIndex = idx;
+        _viewerPhotos = KIDS_GAL_ITEMS.map((g) => ({ src: g.src, caption: g.label }));
+        _viewerIndex = idx;
+        const item = KIDS_GAL_ITEMS[idx];
+        const img = document.getElementById("imgViewerImg");
+        img.src = item.src;
+        img.style.display = "block";
+        document.getElementById("imgViewerCaption").textContent = item.label;
+        document.getElementById("imgViewerCounter").textContent =
+          idx + 1 + " / " + KIDS_GAL_ITEMS.length;
+        document.getElementById("imgViewerPrev").classList.toggle("hidden", idx === 0);
+        document
+          .getElementById("imgViewerNext")
+          .classList.toggle("hidden", idx === KIDS_GAL_ITEMS.length - 1);
+        document.getElementById("imgViewer").classList.add("open");
+      }
     </script>
+
+    <div class="album-lightbox" id="albumLightbox">
+      <div class="album-lb-inner">
+        <div class="album-lb-header">
+          <div class="album-lb-title" id="albumLbTitle"></div>
+          <button class="album-lb-close" onclick="closeMonthLightbox()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="album-lb-photos" id="albumLbPhotos"></div>
+      </div>
+    </div>
+
+    <div class="img-viewer" id="imgViewer">
+      <button class="img-viewer-close" onclick="closeImgViewer()">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="img-viewer-prev" id="imgViewerPrev" onclick="imgViewerPrev()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="img-viewer-next" id="imgViewerNext" onclick="imgViewerNext()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="img-viewer-inner">
+        <img class="img-viewer-img" id="imgViewerImg" src="" alt="" />
+        <div class="img-viewer-caption" id="imgViewerCaption"></div>
+      </div>
+      <div class="img-viewer-counter" id="imgViewerCounter"></div>
+    </div>
   </body>
 </html>
