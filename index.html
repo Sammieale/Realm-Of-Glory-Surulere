@@ -4663,7 +4663,7 @@
               </div>
             </div>
           </div>
-        </div> 
+        </div>
 
         <!-- WHAT WE DO -->
         <div class="kids-section">
@@ -4726,7 +4726,7 @@
               </div>
             </div>
           </div>
-        </div>     
+        </div>
 
         <!-- AGE GROUPS -->
         <div class="kids-section-alt">
@@ -4794,7 +4794,11 @@
             <div class="kids-gal-grid reveal">
               <div
                 class="kids-gal-item span2x2"
-                style="background: linear-gradient(135deg, #ff6b6b7b, #ffa94d61), url('assets/img/KINGS_KIDZ.jpg') center;"
+                style="
+                  background:
+                    linear-gradient(135deg, #ff6b6b7b, #ffa94d61),
+                    url(&quot;assets/img/KINGS_KIDZ.jpg&quot;) center;
+                "
               >
                 <div class="kids-gal-inner">🙌</div>
                 <div class="kids-gal-ov"><i class="fas fa-expand"></i></div>
@@ -5082,7 +5086,7 @@
               </div>
             </div>
           </div>
-        </div>   
+        </div>
 
         <!-- CTA -->
         <div class="kids-cta">
@@ -5877,6 +5881,11 @@
           const res = await fetch(
             `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YT_CHANNEL_ID}&eventType=live&type=video&key=${YT_API_KEY}`,
           );
+          if (res.status === 403) {
+            console.warn("YouTube API key error (403). Falling back to channel embed.");
+            showChannelFallback();
+            return;
+          }
           const data = await res.json();
           if (data.items && data.items.length > 0) {
             const videoId = data.items[0].id.videoId;
@@ -5892,7 +5901,15 @@
           }
         } catch (e) {
           console.log("Live check failed:", e);
+          showChannelFallback();
         }
+      }
+
+      function showChannelFallback() {
+        document.getElementById("streamOff").style.display = "none";
+        const frame = document.getElementById("liveFrame");
+        frame.src = `https://www.youtube.com/embed/live_stream?channel=${YT_CHANNEL_ID}`;
+        frame.style.display = "block";
       }
 
       function initLivestream() {
