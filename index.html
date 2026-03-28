@@ -5873,21 +5873,23 @@
       });
 
       // ===================== YOUTUBE LIVE CHECK =====================
-      const YT_CHANNEL_ID = "UCv19XyCX-r4FbBImxJ2gGQg";
-      const YT_API_KEY = "AIzaSyCZ5zOKMhVnn4Lhpzix8mAkcOlgbgi6p7o";
+      // API key is hidden inside Google Apps Script — not visible here
+      const PROXY_URL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID_HERE/exec";
 
       async function checkYouTubeLive() {
         try {
-          const res = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YT_CHANNEL_ID}&eventType=live&type=video&key=${YT_API_KEY}`,
-          );
-          if (res.status === 403) {
-            console.warn("YouTube API key error (403). Falling back to channel embed.");
-            showChannelFallback();
+          const res = await fetch(PROXY_URL);
+
+          if (!res.ok) {
+            console.warn("Livestream check failed:", res.status);
+            showStreamOffline();
             return;
           }
+
           const data = await res.json();
+
           if (data.items && data.items.length > 0) {
+            // Church is LIVE 🔴
             const videoId = data.items[0].id.videoId;
             document.getElementById("streamOff").style.display = "none";
             const frame = document.getElementById("liveFrame");
@@ -5895,21 +5897,20 @@
             frame.style.display = "block";
             document.getElementById("liveNowBtn").classList.add("show");
           } else {
-            document.getElementById("streamOff").style.display = "flex";
-            document.getElementById("liveFrame").style.display = "none";
-            document.getElementById("liveFrame").src = "";
+            // Not live
+            showStreamOffline();
           }
         } catch (e) {
-          console.log("Live check failed:", e);
-          showChannelFallback();
+          console.log("Live check error:", e);
+          showStreamOffline();
         }
       }
 
-      function showChannelFallback() {
-        document.getElementById("streamOff").style.display = "none";
-        const frame = document.getElementById("liveFrame");
-        frame.src = `https://www.youtube.com/embed/live_stream?channel=${YT_CHANNEL_ID}`;
-        frame.style.display = "block";
+      function showStreamOffline() {
+        document.getElementById("streamOff").style.display = "flex";
+        document.getElementById("liveFrame").style.display = "none";
+        document.getElementById("liveFrame").src = "";
+        document.getElementById("liveNowBtn").classList.remove("show");
       }
 
       function initLivestream() {
