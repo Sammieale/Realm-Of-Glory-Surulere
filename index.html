@@ -6418,39 +6418,64 @@
       // ===================== YOUTUBE LIVE CHECK =====================
       const YT_CHANNEL_ID = "UCv19XyCX-r4FbBImxJ2gGQg";
       const YT_API_KEY = "AIzaSyCZ5zOKMhVnn4Lhpzix8mAkcOlgbgi6p7o";
+      let _lsInterval = null;
 
-      async function checkYouTubeLive() {
-        const PROXY_URL =
-          "https://script.google.com/macros/s/AKfycbx7OJA-Uedjt4o_p-OqXOV0OBedkbs5tSqq-cPf7t_Nb7i9ydeBklbDkoNRg0lwpQPo/exec";
-        try {
-          const res = await fetch(PROXY_URL);
-          const data = await res.json();
+      function checkYouTubeLive() {
+        const old = document.getElementById("_ytLiveScript");
+        if (old) old.remove();
+
+        window._onYTLive = function (data) {
+          const old2 = document.getElementById("_ytLiveScript");
+          if (old2) old2.remove();
+
           if (data.items && data.items.length > 0) {
-            const videoId = data.items[0].id.videoId;
-            document.getElementById("streamOff").style.display = "none";
-            const frame = document.getElementById("liveFrame");
-            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-            frame.style.display = "block";
-            document.getElementById("liveNowBtn").classList.add("show");
+            showStreamOn(data.items[0].id.videoId);
           } else {
             showStreamOff();
           }
-        } catch (e) {
-          console.log("Live check failed:", e);
+        };
+
+        const script = document.createElement("script");
+        script.id = "_ytLiveScript";
+        script.src =
+          "https://www.googleapis.com/youtube/v3/search" +
+          "?part=snippet" +
+          "&channelId=" +
+          YT_CHANNEL_ID +
+          "&eventType=live" +
+          "&type=video" +
+          "&maxResults=1" +
+          "&key=" +
+          YT_API_KEY +
+          "&callback=_onYTLive";
+        script.onerror = function () {
           showStreamOff();
-        }
+        };
+        document.head.appendChild(script);
       }
+
+      function showStreamOn(videoId) {
+        document.getElementById("streamOff").style.display = "none";
+        const frame = document.getElementById("liveFrame");
+        const newSrc = "https://www.youtube.com/embed/" + videoId + "?autoplay=1&rel=0";
+        if (frame.src !== newSrc) frame.src = newSrc;
+        frame.style.display = "block";
+        document.getElementById("liveNowBtn").classList.add("show");
+      }
+
       function showStreamOff() {
         document.getElementById("streamOff").style.display = "flex";
         const frame = document.getElementById("liveFrame");
         frame.style.display = "none";
         frame.src = "";
-      }
-      function initLivestream() {
-        checkYouTubeLive();
-        setInterval(checkYouTubeLive, 120000);
+        document.getElementById("liveNowBtn").classList.remove("show");
       }
 
+      function initLivestream() {
+        checkYouTubeLive();
+        if (_lsInterval) clearInterval(_lsInterval);
+        _lsInterval = setInterval(checkYouTubeLive, 120000);
+      }
       // ===================== SEARCH =====================
       const SEARCH_INDEX = [
         {
