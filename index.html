@@ -6420,16 +6420,10 @@
       const YT_API_KEY = "AIzaSyCZ5zOKMhVnn4Lhpzix8mAkcOlgbgi6p7o";
 
       async function checkYouTubeLive() {
+        const PROXY_URL = "YOUR_APPS_SCRIPT_URL_HERE";
         try {
-          const res = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YT_CHANNEL_ID}&eventType=live&type=video&key=${YT_API_KEY}`,
-          );
+          const res = await fetch(PROXY_URL);
           const data = await res.json();
-          if (res.status === 403 || (data.error && data.error.code === 403)) {
-            console.warn("YouTube API key error (403). Showing offline state.");
-            showStreamOff();
-            return;
-          }
           if (data.items && data.items.length > 0) {
             const videoId = data.items[0].id.videoId;
             document.getElementById("streamOff").style.display = "none";
