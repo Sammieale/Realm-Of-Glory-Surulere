@@ -6416,42 +6416,28 @@
       });
 
       // ===================== YOUTUBE LIVE CHECK =====================
-      const YT_CHANNEL_ID = "UCv19XyCX-r4FbBImxJ2gGQg";
-      const YT_API_KEY = "AIzaSyCZ5zOKMhVnn4Lhpzix8mAkcOlgbgi6p7o";
+      const PROXY_URL =
+        "https://script.google.com/macros/s/AKfycbzqdwfeu_qaVWlogp9gb8JlsFFcSB5wRrLWF-fJr8IHxv56jdYzJ-f_t7gwjFppgQHz/exec";
       let _lsInterval = null;
 
-      function checkYouTubeLive() {
-        const old = document.getElementById("_ytLiveScript");
-        if (old) old.remove();
+      async function checkYouTubeLive() {
+        try {
+          const res = await fetch(PROXY_URL + "?t=" + Date.now(), {
+            method: "GET",
+            mode: "cors",
+          });
+          const data = await res.json();
+          console.log("Live check:", data);
 
-        window._onYTLive = function (data) {
-          const old2 = document.getElementById("_ytLiveScript");
-          if (old2) old2.remove();
-
-          if (data.items && data.items.length > 0) {
-            showStreamOn(data.items[0].id.videoId);
+          if (data.isLive && data.videoId) {
+            showStreamOn(data.videoId);
           } else {
             showStreamOff();
           }
-        };
-
-        const script = document.createElement("script");
-        script.id = "_ytLiveScript";
-        script.src =
-          "https://www.googleapis.com/youtube/v3/search" +
-          "?part=snippet" +
-          "&channelId=" +
-          YT_CHANNEL_ID +
-          "&eventType=live" +
-          "&type=video" +
-          "&maxResults=1" +
-          "&key=" +
-          YT_API_KEY +
-          "&callback=_onYTLive";
-        script.onerror = function () {
+        } catch (e) {
+          console.log("Live check failed:", e);
           showStreamOff();
-        };
-        document.head.appendChild(script);
+        }
       }
 
       function showStreamOn(videoId) {
@@ -6474,7 +6460,19 @@
       function initLivestream() {
         checkYouTubeLive();
         if (_lsInterval) clearInterval(_lsInterval);
-        _lsInterval = setInterval(checkYouTubeLive, 120000);
+
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+
+        const isServiceTime =
+          (day === 0 && hour >= 9 && hour <= 13) || // Sunday 10am–1pm
+          (day === 3 && hour >= 5 && hour <= 7) || // Wednesday 6am–7am
+          (day === 5 && hour >= 5 && hour <= 9); // Friday 6am–9am
+
+        if (isServiceTime) {
+          _lsInterval = setInterval(checkYouTubeLive, 180000);
+        }
       }
       // ===================== SEARCH =====================
       const SEARCH_INDEX = [
